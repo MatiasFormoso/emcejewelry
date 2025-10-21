@@ -87,173 +87,86 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProducts.map((product, index) => (
-            <motion.div
+            <div
               key={product.id}
-              className="group relative bg-white border border-gray-200/50 hover:border-primary/30 transition-all duration-500 overflow-hidden rounded-xl shadow-sm hover:shadow-xl"
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
-              whileHover={{
-                y: -3,
-                transition: { duration: 0.2 }
-              }}
+              className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
             >
               {/* Product Image */}
-              <div className="relative h-80 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-24 h-24 bg-gradient-to-br from-primary/10 to-yellow-400/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-500">
-                      <span className="text-5xl">💎</span>
-                    </div>
+              <div className="h-64 bg-gray-100 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-3xl">💎</span>
                   </div>
-                </div>
-                
-                {/* Hover Overlay */}
-                <motion.div 
-                  className="absolute inset-0 bg-black/20"
-                  initial={{ opacity: 0 }}
-                         animate={{ opacity: hoveredProduct === product.id ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div 
-                      className="flex space-x-4"
-                      initial={{ y: 20, opacity: 0 }}
-                       animate={{
-                         y: hoveredProduct === product.id ? 0 : 20,
-                         opacity: hoveredProduct === product.id ? 1 : 0
-                       }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
-                    >
-                      <motion.button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleAddToCart(product);
-                        }}
-                        disabled={addingToCart === product.id}
-                        className="bg-white text-black px-6 py-3 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg min-h-[48px] min-w-[120px] touch-manipulation"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        style={{ touchAction: 'manipulation' }}
-                      >
-                        {addingToCart === product.id ? (
-                          <motion.div
-                            className="w-3 h-3 mr-1 border border-gray-400 border-t-transparent rounded-full"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          />
-                        ) : (
-                          <ShoppingCart className="w-3 h-3 mr-1" />
-                        )}
-                        {addingToCart === product.id 
-                          ? (locale === 'en' ? 'Adding...' : 'Agregando...')
-                          : (locale === 'en' ? 'Add to Cart' : 'Agregar')
-                        }
-                      </motion.button>
-                      
-                      <motion.button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleToggleFavorite(product);
-                        }}
-                        disabled={addingToFavorites === product.id}
-                        className={`px-6 py-3 rounded-lg font-medium tracking-wider uppercase text-xs transition-all duration-200 flex items-center shadow-lg min-h-[48px] min-w-[120px] touch-manipulation ${
-                          isFavorite(product.id)
-                            ? 'bg-red-500 text-white border border-red-500 hover:bg-red-600'
-                            : 'bg-transparent border border-white text-white hover:bg-white/10'
-                        }`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        style={{ touchAction: 'manipulation' }}
-                      >
-                        {addingToFavorites === product.id ? (
-                          <motion.div
-                            className="w-3 h-3 mr-1 border border-white border-t-transparent rounded-full"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          />
-                        ) : (
-                          <Heart className={`w-3 h-3 mr-1 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
-                        )}
-                        {addingToFavorites === product.id 
-                          ? (locale === 'en' ? 'Saving...' : 'Guardando...')
-                          : (locale === 'en' ? 'Wishlist' : 'Favoritos')
-                        }
-                      </motion.button>
-                    </motion.div>
-                  </div>
-                </motion.div>
-
-                {/* Featured Badge */}
-                <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 text-xs font-light tracking-wider uppercase">
-                  {locale === 'en' ? 'Featured' : 'Destacada'}
                 </div>
               </div>
-              
+
               {/* Product Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-playfair font-light text-gray-800 mb-2 tracking-wide">
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {locale === 'en' ? product.nameEn : product.name}
                 </h3>
 
-                <p className="text-gray-600 mb-4 text-sm font-light leading-relaxed">
+                <p className="text-gray-600 mb-3 text-sm">
                   {locale === 'en' ? product.descriptionEn : product.description}
                 </p>
 
-                {/* Materials */}
-                <div className="mb-4">
-                  <h4 className="text-xs font-light text-gray-500 uppercase tracking-wider mb-2">
-                    {locale === 'en' ? 'Materials' : 'Materiales'}
-                  </h4>
-                  <div className="flex flex-wrap gap-1">
-                    {(locale === 'en' ? product.materialsEn : product.materials).map((material, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-light">
-                        {material}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Price and Weight */}
+                {/* Price */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-playfair font-light gradient-text-gold">
+                  <span className="text-xl font-bold text-yellow-600">
                     {formatPrice(product.price)}
                   </span>
                   {product.weight && (
-                    <span className="text-xs text-gray-500 font-light">
+                    <span className="text-xs text-gray-500">
                       {product.weight}g
                     </span>
                   )}
                 </div>
 
-                {/* Rating */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-primary text-primary" />
-                    ))}
-                    <span className="text-xs text-gray-500 ml-2 font-light">(4.9)</span>
-                  </div>
-                  <Link
-                    href={`/${locale}/catalogo`}
-                    className="text-primary text-xs font-light tracking-wider uppercase hover:text-primary/80 transition-colors duration-300 flex items-center"
+                {/* Actions */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
+                    disabled={addingToCart === product.id}
+                    className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center min-h-[44px]"
                   >
-                    {locale === 'en' ? 'View Details' : 'Ver Detalles'}
-                    <ArrowRight className="w-3 h-3 ml-1" />
-                  </Link>
+                    {addingToCart === product.id ? (
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <>
+                        <ShoppingCart className="w-4 h-4 mr-1" />
+                        {locale === 'en' ? 'Add to Cart' : 'Agregar'}
+                      </>
+                    )}
+                  </button>
+                  
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleToggleFavorite(product);
+                    }}
+                    disabled={addingToFavorites === product.id}
+                    className={`px-3 py-2 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center min-h-[44px] min-w-[44px] ${
+                      isFavorite(product.id)
+                        ? 'bg-red-500 text-white hover:bg-red-600'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {addingToFavorites === product.id ? (
+                      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      <Heart className={`w-4 h-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+                    )}
+                  </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
