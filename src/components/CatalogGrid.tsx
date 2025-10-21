@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Heart, ShoppingCart, ArrowRight } from 'lucide-react';
 import { products, formatPrice } from '@/lib/products';
 import { useCart } from '@/contexts/CartContext';
@@ -112,31 +113,53 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <div
+          {filteredProducts.map((product, index) => (
+            <motion.div
               key={product.id}
-              className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-md transition-all duration-200 ease-out"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              whileHover={{ 
+                y: -4,
+                transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
+              }}
+              className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-lg transition-all duration-300 ease-out group"
             >
               {/* Product Image */}
-              <div className="h-64 bg-gradient-to-br from-stone-50 to-stone-100 flex items-center justify-center relative">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-stone-200 to-stone-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+              <div className="h-64 bg-gradient-to-br from-stone-50 to-stone-100 flex items-center justify-center relative overflow-hidden">
+                <motion.div 
+                  className="text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  <motion.div 
+                    className="w-16 h-16 bg-gradient-to-br from-stone-200 to-stone-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm"
+                    whileHover={{ rotate: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <div className="w-8 h-8 bg-gradient-to-br from-stone-400 to-stone-500 rounded-full flex items-center justify-center">
                       <div className="w-4 h-4 bg-white rounded-full opacity-60"></div>
                     </div>
-                  </div>
+                  </motion.div>
                   <p className="text-xs text-stone-500 font-light tracking-wide uppercase">Jewelry</p>
-                </div>
+                </motion.div>
                 
                 {/* Favorite Button */}
-                <button
+                <motion.button
                   onClick={() => handleToggleFavorite(product)}
                   disabled={addingToFavorites === product.id}
-                           className={`absolute top-4 right-4 p-2 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] min-w-[44px] ${
-                             isFavorite(product.id)
-                               ? 'bg-stone-600 text-white hover:bg-stone-700'
-                               : 'bg-white/90 text-stone-600 hover:bg-white'
-                           }`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className={`absolute top-4 right-4 p-2 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] min-w-[44px] ${
+                    isFavorite(product.id)
+                      ? 'bg-stone-600 text-white hover:bg-stone-700'
+                      : 'bg-white/90 text-stone-600 hover:bg-white'
+                  }`}
                 >
                   {addingToFavorites === product.id ? (
                     <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -193,7 +216,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

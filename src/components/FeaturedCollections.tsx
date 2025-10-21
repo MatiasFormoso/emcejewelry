@@ -7,6 +7,7 @@ import { getFeaturedProducts, formatPrice } from '@/lib/products';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useSimpleToast } from './SimpleToast';
+import ScrollReveal from './ScrollReveal';
 import type { Dict, Locale } from '@/i18n/config';
 import { useState } from 'react';
 
@@ -63,22 +64,22 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
     <section className="py-20 bg-gradient-to-b from-white to-stone-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-stone-800 mb-6 tracking-tight">
-            {t.featuredCollections.title}
-          </h2>
-          <p className="text-lg text-stone-600 max-w-2xl mx-auto font-light leading-relaxed">
-            {t.featuredCollections.subtitle}
-          </p>
-        </div>
+        <ScrollReveal direction="up" delay={0.2}>
+          <div className="text-center mb-20">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-stone-800 mb-6 tracking-tight">
+              {t.featuredCollections.title}
+            </h2>
+            <p className="text-lg text-stone-600 max-w-2xl mx-auto font-light leading-relaxed">
+              {t.featuredCollections.subtitle}
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-md transition-all duration-200 ease-out"
-            >
+          {featuredProducts.map((product, index) => (
+            <ScrollReveal key={product.id} direction="up" delay={0.3 + index * 0.1}>
+              <div className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-md transition-all duration-200 ease-out">
               {/* Product Image */}
               <div className="h-64 bg-gradient-to-br from-stone-50 to-stone-100 flex items-center justify-center">
                 <div className="text-center">
@@ -148,6 +149,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                 </div>
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
 
