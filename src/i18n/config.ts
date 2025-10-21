@@ -73,9 +73,15 @@ export type Dict = {
     filters: {
       all: string;
       rings: string;
-      necklaces: string;
       earrings: string;
+      'ear-cuffs': string;
       bracelets: string;
+      chokers: string;
+      sets: string;
+      pearls: string;
+      'colombian-emeralds': string;
+      'natural-stones': string;
+      anklets: string;
     };
   };
   favorites: {
