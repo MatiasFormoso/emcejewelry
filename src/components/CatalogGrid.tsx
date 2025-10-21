@@ -175,9 +175,22 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                       transition={{ duration: 0.3, delay: 0.1 }}
                     >
                       <motion.button
-                        onClick={() => handleAddToCart(product)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAddToCart(product);
+                        }}
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        onTouchEnd={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAddToCart(product);
+                        }}
                         disabled={addingToCart === product.id}
-                        className="bg-white text-black px-4 py-2 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg"
+                        className="bg-white text-black px-6 py-3 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg min-h-[44px] min-w-[120px] touch-manipulation"
                      whileHover={{ scale: 1.02 }}
                      whileTap={{ scale: 0.98 }}
                       >
@@ -200,17 +213,30 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                 </motion.div>
 
                 {/* Favorite Button */}
-                <motion.button
-                  onClick={() => handleToggleFavorite(product)}
-                  disabled={addingToFavorites === product.id}
-                  className={`absolute top-4 right-4 p-2 rounded-lg font-medium tracking-wider uppercase text-xs transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-lg ${
-                    isFavorite(product.id) 
-                      ? 'bg-red-500 text-white hover:bg-red-600' 
-                      : 'bg-white/90 text-gray-700 hover:bg-white'
-                  }`}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
+                       <motion.button
+                         onClick={(e) => {
+                           e.preventDefault();
+                           e.stopPropagation();
+                           handleToggleFavorite(product);
+                         }}
+                         onTouchStart={(e) => {
+                           e.preventDefault();
+                           e.stopPropagation();
+                         }}
+                         onTouchEnd={(e) => {
+                           e.preventDefault();
+                           e.stopPropagation();
+                           handleToggleFavorite(product);
+                         }}
+                         disabled={addingToFavorites === product.id}
+                         className={`absolute top-4 right-4 p-3 rounded-lg font-medium tracking-wider uppercase text-xs transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-lg min-h-[44px] min-w-[44px] touch-manipulation ${
+                           isFavorite(product.id)
+                             ? 'bg-red-500 text-white hover:bg-red-600'
+                             : 'bg-white/90 text-gray-700 hover:bg-white'
+                         }`}
+                         whileHover={{ scale: 1.1 }}
+                         whileTap={{ scale: 0.9 }}
+                       >
                   {addingToFavorites === product.id ? (
                     <motion.div
                       className="w-3 h-3 border border-white border-t-transparent rounded-full"
@@ -262,9 +288,22 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                 {/* Actions */}
                 <div className="flex space-x-3">
                   <motion.button
-                    onClick={() => handleAddToCart(product)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
+                    onTouchStart={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleAddToCart(product);
+                    }}
                     disabled={addingToCart === product.id}
-                    className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-3 px-4 rounded-lg font-medium tracking-wider uppercase text-xs hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center justify-center shadow-md hover:shadow-lg"
+                    className="flex-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-3 px-4 rounded-lg font-medium tracking-wider uppercase text-xs hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center justify-center shadow-md hover:shadow-lg min-h-[44px] touch-manipulation"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >

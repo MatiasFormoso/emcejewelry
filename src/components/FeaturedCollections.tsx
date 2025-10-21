@@ -122,7 +122,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <motion.div 
-                      className="flex space-x-2"
+                      className="flex space-x-4"
                       initial={{ y: 20, opacity: 0 }}
                        animate={{
                          y: hoveredProduct === product.id ? 0 : 20,
@@ -132,11 +132,21 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                     >
                       <motion.button
                         onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleAddToCart(product);
+                        }}
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        onTouchEnd={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           handleAddToCart(product);
                         }}
                         disabled={addingToCart === product.id}
-                        className="bg-white text-black px-4 py-2 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg"
+                        className="bg-white text-black px-6 py-3 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg min-h-[44px] min-w-[120px] touch-manipulation"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -157,11 +167,21 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                       
                       <motion.button
                         onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleToggleFavorite(product);
+                        }}
+                        onTouchStart={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }}
+                        onTouchEnd={(e) => {
+                          e.preventDefault();
                           e.stopPropagation();
                           handleToggleFavorite(product);
                         }}
                         disabled={addingToFavorites === product.id}
-                        className={`px-4 py-2 rounded-lg font-medium tracking-wider uppercase text-xs transition-all duration-200 flex items-center shadow-lg ${
+                        className={`px-6 py-3 rounded-lg font-medium tracking-wider uppercase text-xs transition-all duration-200 flex items-center shadow-lg min-h-[44px] min-w-[120px] touch-manipulation ${
                           isFavorite(product.id)
                             ? 'bg-red-500 text-white border border-red-500 hover:bg-red-600'
                             : 'bg-transparent border border-white text-white hover:bg-white/10'
