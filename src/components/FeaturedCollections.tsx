@@ -20,9 +20,9 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const { success } = useToastContext();
   const { triggerCartAnimation } = useCartFeedback();
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-  const [addingToCart, setAddingToCart] = useState<number | null>(null);
-  const [addingToFavorites, setAddingToFavorites] = useState<number | null>(null);
+  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  const [addingToCart, setAddingToCart] = useState<string | null>(null);
+  const [addingToFavorites, setAddingToFavorites] = useState<string | null>(null);
 
   const handleAddToCart = async (product: any) => {
     setAddingToCart(product.id);
@@ -86,8 +86,8 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
             <motion.div
               key={product.id}
               className="group relative bg-white border border-gray-200/50 hover:border-primary/30 transition-all duration-500 overflow-hidden rounded-xl shadow-sm hover:shadow-xl"
-              onMouseEnter={() => setHoveredProduct(index)}
-              onMouseLeave={() => setHoveredProduct(null)}
+                     onMouseEnter={() => setHoveredProduct(product.id)}
+                     onMouseLeave={() => setHoveredProduct(null)}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
@@ -114,17 +114,17 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                 <motion.div 
                   className="absolute inset-0 bg-black/20"
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: hoveredProduct === index ? 1 : 0 }}
+                         animate={{ opacity: hoveredProduct === product.id ? 1 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
                     <motion.div 
                       className="flex space-x-2"
                       initial={{ y: 20, opacity: 0 }}
-                      animate={{ 
-                        y: hoveredProduct === index ? 0 : 20, 
-                        opacity: hoveredProduct === index ? 1 : 0 
-                      }}
+                       animate={{
+                         y: hoveredProduct === product.id ? 0 : 20,
+                         opacity: hoveredProduct === product.id ? 1 : 0
+                       }}
                       transition={{ duration: 0.3, delay: 0.1 }}
                     >
                       <motion.button
