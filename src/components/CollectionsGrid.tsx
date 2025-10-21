@@ -13,34 +13,34 @@ interface CollectionsGridProps {
 export default function CollectionsGrid({ t, locale }: CollectionsGridProps) {
   const collections = [
     { 
-      name: locale === 'en' ? 'Classic Collection' : 'Colección Clásica', 
-      description: locale === 'en' ? 'Timeless pieces that never go out of style' : 'Piezas atemporales que nunca pasan de moda',
+      name: locale === 'en' ? 'Rings Collection' : 'Colección de Anillos', 
+      description: locale === 'en' ? 'Elegant rings with zircon and pearls' : 'Anillos elegantes con zirconia y perlas',
       href: `/${locale}/catalogo?category=rings`
     },
     { 
-      name: locale === 'en' ? 'Modern Collection' : 'Colección Moderna', 
-      description: locale === 'en' ? 'Contemporary designs for current style' : 'Diseños contemporáneos para el estilo actual',
-      href: `/${locale}/catalogo?category=necklaces`
-    },
-    { 
-      name: locale === 'en' ? 'Vintage Collection' : 'Colección Vintage', 
-      description: locale === 'en' ? 'Retro inspiration with a modern touch' : 'Inspiración retro con un toque moderno',
+      name: locale === 'en' ? 'Earrings Collection' : 'Colección de Aretes', 
+      description: locale === 'en' ? 'From small hoops to long elegant earrings' : 'Desde aretes pequeños hasta largos y elegantes',
       href: `/${locale}/catalogo?category=earrings`
     },
     { 
-      name: locale === 'en' ? 'Minimalist Collection' : 'Colección Minimalista', 
-      description: locale === 'en' ? 'Elegance in its purest form' : 'Elegancia en su forma más pura',
-      href: `/${locale}/catalogo?category=bracelets`
+      name: locale === 'en' ? 'Ear Cuffs' : 'Ear Cuffs', 
+      description: locale === 'en' ? 'Modern ear cuffs for a trendy look' : 'Ear cuffs modernos para un look trendy',
+      href: `/${locale}/catalogo?category=ear-cuffs`
     },
     { 
-      name: locale === 'en' ? 'Bohemian Collection' : 'Colección Bohemia', 
-      description: locale === 'en' ? 'Free and artistic style' : 'Estilo libre y artístico',
-      href: `/${locale}/catalogo`
+      name: locale === 'en' ? 'Pearls Collection' : 'Colección de Perlas', 
+      description: locale === 'en' ? 'Natural pearls in elegant designs' : 'Perlas naturales en diseños elegantes',
+      href: `/${locale}/catalogo?category=pearls`
     },
     { 
-      name: locale === 'en' ? 'Elegant Collection' : 'Colección Elegante', 
-      description: locale === 'en' ? 'Sophistication for special occasions' : 'Sofisticación para ocasiones especiales',
-      href: `/${locale}/catalogo`
+      name: locale === 'en' ? 'Colombian Emeralds' : 'Esmeraldas Colombianas', 
+      description: locale === 'en' ? 'Authentic Colombian emeralds' : 'Esmeraldas colombianas auténticas',
+      href: `/${locale}/catalogo?category=colombian-emeralds`
+    },
+    { 
+      name: locale === 'en' ? 'Complete Sets' : 'Sets Completos', 
+      description: locale === 'en' ? 'Matching sets for special occasions' : 'Sets coordinados para ocasiones especiales',
+      href: `/${locale}/catalogo?category=sets`
     }
   ];
 

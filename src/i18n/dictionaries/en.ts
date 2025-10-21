@@ -83,9 +83,15 @@ const en: Dict = {
     filters: {
       all: "All",
       rings: "Rings",
-      necklaces: "Necklaces",
       earrings: "Earrings",
+      "ear-cuffs": "Ear Cuffs",
       bracelets: "Bracelets",
+      chokers: "Chokers",
+      sets: "Sets",
+      pearls: "Pearls",
+      "colombian-emeralds": "Colombian Emeralds",
+      "natural-stones": "Natural Stones",
+      anklets: "Anklets",
     },
   },
 

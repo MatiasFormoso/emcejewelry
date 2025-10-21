@@ -23,7 +23,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       const category = urlParams.get('category');
-      if (category && ['rings', 'necklaces', 'earrings', 'bracelets'].includes(category)) {
+      if (category && ['rings', 'earrings', 'ear-cuffs', 'bracelets', 'chokers', 'sets', 'pearls', 'colombian-emeralds', 'natural-stones', 'anklets'].includes(category)) {
         setSelectedCategory(category);
       }
     }
@@ -32,9 +32,15 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   const categories = [
     { key: 'all', label: t.catalog.filters.all },
     { key: 'rings', label: t.catalog.filters.rings },
-    { key: 'necklaces', label: t.catalog.filters.necklaces },
     { key: 'earrings', label: t.catalog.filters.earrings },
+    { key: 'ear-cuffs', label: t.catalog.filters['ear-cuffs'] },
     { key: 'bracelets', label: t.catalog.filters.bracelets },
+    { key: 'chokers', label: t.catalog.filters.chokers },
+    { key: 'sets', label: t.catalog.filters.sets },
+    { key: 'pearls', label: t.catalog.filters.pearls },
+    { key: 'colombian-emeralds', label: t.catalog.filters['colombian-emeralds'] },
+    { key: 'natural-stones', label: t.catalog.filters['natural-stones'] },
+    { key: 'anklets', label: t.catalog.filters.anklets },
   ];
 
   const filteredProducts = selectedCategory === 'all' 
