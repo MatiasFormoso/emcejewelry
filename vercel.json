@@ -1,6 +1,7 @@
 {
   "framework": "nextjs",
-  "buildCommand": "cd apps/emcejewelry && npm run build",
-  "outputDirectory": "apps/emcejewelry/.next",
-  "installCommand": "cd apps/emcejewelry && npm install"
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "rootDirectory": "apps/emcejewelry"
 }
