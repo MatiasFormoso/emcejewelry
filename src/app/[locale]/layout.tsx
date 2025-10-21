@@ -32,7 +32,7 @@ export default async function LocaleLayout({
   
   return (
         <html lang={locale} className={`${playfair.variable} ${inter.variable} scroll-smooth`}>
-          <body className="font-sans antialiased min-h-screen bg-white text-gray-800">
+          <body className="font-sans antialiased min-h-screen bg-stone-50 text-stone-900 overflow-x-hidden">
             <CartProvider>
               <FavoritesProvider>
                 <CartWrapper t={t} locale={locale as Locale}>

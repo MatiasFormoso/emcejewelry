@@ -21,9 +21,7 @@ export default function CartWrapper({ children, t, locale }: CartWrapperProps) {
   return (
     <>
       <Header t={t} locale={locale} toggleCart={toggleCart} />
-      <main>
-        {children}
-      </main>
+      {children}
       <Cart t={t} locale={locale} isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
