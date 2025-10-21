@@ -705,26 +705,81 @@ html {
   transform: scale(1.03);
 }
 
-/* Prevent accidental touches on mobile */
+/* Mobile touch optimization */
 @media (max-width: 768px) {
-  /* Ensure hero section doesn't capture unwanted touches */
-  #hero {
+  /* Improve scroll performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+  }
+  
+  /* Better touch targets */
+  button, 
+  [role="button"], 
+  input[type="button"], 
+  input[type="submit"], 
+  input[type="reset"],
+  a {
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent double-tap zoom */
+  * {
     touch-action: manipulation;
   }
   
-  /* Prevent overlay elements from capturing touches */
-  .absolute.inset-0 {
-    pointer-events: none;
+  /* Improve button spacing */
+  .flex.space-x-3 > * + * {
+    margin-left: 0.75rem;
   }
   
-  /* Allow touches only on interactive elements */
-  button, a, [role="button"], input, textarea, select {
-    pointer-events: auto;
+  /* Better mobile padding */
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
-  /* Prevent fixed elements from interfering */
-  .fixed {
+  .py-3 {
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+  }
+  
+  /* Mobile-specific button improvements */
+  button {
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Improve mobile menu touch targets */
+  .mobile-menu button,
+  .mobile-menu a {
+    padding: 0.75rem 1rem;
+    min-height: 48px;
+  }
+  
+  /* Disable heavy animations on mobile */
+  .animate-bounce,
+  .animate-ping,
+  .animate-pulse {
+    animation-duration: 1s;
+  }
+  
+  /* Prevent event conflicts */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better hover states for mobile */
+  .hover-scale-105:hover {
+    transform: scale(1.02);
+  }
+  
+  .hover-scale-110:hover {
+    transform: scale(1.05);
   }
 }
 
