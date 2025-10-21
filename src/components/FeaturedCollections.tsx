@@ -27,6 +27,8 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
   const [addingToFavorites, setAddingToFavorites] = useState<string | null>(null);
 
   const handleAddToCart = async (product: any) => {
+    if (addingToCart === product.id) return; // Prevent double calls
+    
     setAddingToCart(product.id);
     addItem(product);
     
@@ -46,6 +48,8 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
   };
 
   const handleToggleFavorite = async (product: any) => {
+    if (addingToFavorites === product.id) return; // Prevent double calls
+    
     setAddingToFavorites(product.id);
     
     if (isFavorite(product.id)) {
@@ -65,7 +69,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
         <Heart className="w-5 h-5 fill-current" />
       );
     }
-    
+
     setAddingToFavorites(null);
   };
 
@@ -85,24 +89,27 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              className="group relative bg-white border border-gray-200/50 hover:border-primary/30 transition-all duration-500 overflow-hidden rounded-xl shadow-sm hover:shadow-xl cursor-pointer"
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
-              onClick={() => router.push(`/${locale}/catalogo`)}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
-              whileHover={{
-                y: -3,
-                transition: { duration: 0.2 }
-              }}
+            <Link
+              href={`/${locale}/catalogo`}
+              className="block"
             >
+              <motion.div
+                key={product.id}
+                className="group relative bg-white border border-gray-200/50 hover:border-primary/30 transition-all duration-500 overflow-hidden rounded-xl shadow-sm hover:shadow-xl cursor-pointer"
+                onMouseEnter={() => setHoveredProduct(product.id)}
+                onMouseLeave={() => setHoveredProduct(null)}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
+                whileHover={{
+                  y: -3,
+                  transition: { duration: 0.2 }
+                }}
+              >
               {/* Product Image */}
               <div className="relative h-80 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -132,16 +139,6 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                     >
                       <motion.button
                         onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleAddToCart(product);
-                        }}
-                        onTouchStart={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                        onTouchEnd={(e) => {
-                          e.preventDefault();
                           e.stopPropagation();
                           handleAddToCart(product);
                         }}
@@ -167,16 +164,6 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                       
                       <motion.button
                         onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleToggleFavorite(product);
-                        }}
-                        onTouchStart={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                        onTouchEnd={(e) => {
-                          e.preventDefault();
                           e.stopPropagation();
                           handleToggleFavorite(product);
                         }}
@@ -267,6 +254,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                 </div>
               </div>
             </motion.div>
+            </Link>
           ))}
         </div>
 

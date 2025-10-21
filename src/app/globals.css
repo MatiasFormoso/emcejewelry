@@ -379,7 +379,7 @@ img {
 
 /* Optimización de scroll */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Optimización de animaciones para usuarios que prefieren movimiento reducido */
@@ -581,7 +581,7 @@ html {
 
 /* Smooth scrolling */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   overflow-x: hidden;
 }
 
@@ -710,7 +710,7 @@ html {
   /* Improve scroll performance */
   * {
     -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
   
   /* Reduce motion for better performance */

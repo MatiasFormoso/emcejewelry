@@ -56,6 +56,8 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
     : products.filter(product => product.category === selectedCategory);
 
   const handleAddToCart = async (product: any) => {
+    if (addingToCart === product.id) return; // Prevent double calls
+    
     setAddingToCart(product.id);
     addItem(product);
 
@@ -75,6 +77,8 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   };
 
   const handleToggleFavorite = async (product: any) => {
+    if (addingToFavorites === product.id) return; // Prevent double calls
+    
     setAddingToFavorites(product.id);
     
     if (isFavorite(product.id)) {
@@ -94,7 +98,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
         <Heart className="w-5 h-5 fill-current" />
       );
     }
-    
+
     setAddingToFavorites(null);
   };
 
@@ -176,16 +180,6 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                     >
                       <motion.button
                         onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleAddToCart(product);
-                        }}
-                        onTouchStart={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                        onTouchEnd={(e) => {
-                          e.preventDefault();
                           e.stopPropagation();
                           handleAddToCart(product);
                         }}
@@ -215,16 +209,6 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                 {/* Favorite Button */}
                        <motion.button
                          onClick={(e) => {
-                           e.preventDefault();
-                           e.stopPropagation();
-                           handleToggleFavorite(product);
-                         }}
-                         onTouchStart={(e) => {
-                           e.preventDefault();
-                           e.stopPropagation();
-                         }}
-                         onTouchEnd={(e) => {
-                           e.preventDefault();
                            e.stopPropagation();
                            handleToggleFavorite(product);
                          }}
@@ -289,16 +273,6 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                 <div className="flex space-x-3">
                   <motion.button
                     onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleAddToCart(product);
-                    }}
-                    onTouchStart={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault();
                       e.stopPropagation();
                       handleAddToCart(product);
                     }}
