@@ -10,7 +10,7 @@ type HeroSectionProps = { t: Dict; locale: Locale };
 
 export default function HeroSection({ t, locale }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh' }}>
+    <section id="hero" className="relative overflow-hidden">
       <Image
         src="/hero.png"
         alt="EMC Jewelry - Luxury Jewelry Collection"
@@ -71,7 +71,7 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
            </motion.div>
          </div>
 
-         <div className="absolute inset-0 flex items-center justify-center pt-16 sm:pt-12">
+         <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center text-white px-6 max-w-6xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

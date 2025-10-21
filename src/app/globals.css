@@ -400,12 +400,13 @@ html {
   transform: translateY(-2px) !important;
 }
 
-/* Hero full screen implementation - SAME AS LANDING */
+/* Hero full screen implementation - EXACT COPY FROM DEMO-CAFE */
 #hero {
   position: relative;
   overflow: hidden;
-  height: 100vh;
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
+  max-height: 100dvh;
 }
 
 #hero img {
@@ -416,7 +417,7 @@ html {
   object-fit: cover;
 }
 
-/* Mobile optimizations */
+/* Mobile specific fixes - EXACT COPY FROM DEMO-CAFE */
 @media (max-width: 768px) {
   html {
     height: 100%;
@@ -429,13 +430,113 @@ html {
   }
   
   #hero {
-    height: 100vh !important;
-    min-height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    position: relative;
+    overflow: hidden;
   }
   
   #hero img {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+  }
+}
+
+/* Fallback para navegadores que no soportan dvh - EXACT COPY FROM DEMO-CAFE */
+@supports not (height: 100dvh) {
+  #hero {
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+/* iPhone specific fixes - EXACT COPY FROM DEMO-CAFE */
+@supports (-webkit-touch-callout: none) {
+  .ios-fix {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  /* Fix for iOS Safari viewport issues */
+  .ios-viewport-fix {
+    height: 100vh;
+  }
+
+  /* Prevent viewport changes on scroll */
+  #hero {
     height: 100vh !important;
     min-height: 100vh !important;
+    position: relative;
+  }
+
+  #hero img {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  /* Fix iOS Safari viewport issues */
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Simple fix for embedded browsers viewport changes */
+  #hero {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Prevent viewport changes in embedded browsers */
+  @media (max-width: 768px) {
+    html {
+      height: 100%;
+      overflow-x: hidden;
+    }
+    
+    body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+    
+    #hero {
+      height: 100vh !important;
+      min-height: 100vh !important;
+      max-height: 100vh !important;
+      position: relative;
+    }
+    
+    #hero img {
+      height: 100vh !important;
+      min-height: 100vh !important;
+      max-height: 100vh !important;
+    }
+  }
+
+  /* iPhone specific header spacing */
+  nav {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+
+  /* Better touch targets for iPhone */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* iPhone text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
