@@ -20,8 +20,8 @@ const es: Dict = {
     badge: "Colección Exclusiva",
     title: "EMC Jewelry",
     subtitle: "Descubre la elegancia atemporal en cada pieza única",
-    ctaPrimary: "Ver Colección",
-    ctaSecondary: "Explorar Catálogo",
+    ctaPrimary: "Explorar Catálogo",
+    ctaSecondary: "Ver Colección",
     features: {
       quality: "Calidad Premium",
       craftsmanship: "Artesanía Fina",

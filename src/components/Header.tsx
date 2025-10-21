@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ShoppingCart, Heart, Search, User } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useCartFeedback } from '@/hooks/useCartFeedback';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import LocaleSwitcher from './LocaleSwitcher';
@@ -15,6 +16,7 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { state: cartState } = useCart();
   const { state: favoritesState } = useFavorites();
+  const { feedbackState } = useCartFeedback();
 
   const navigation = [
     { name: t.nav.home, href: `/${locale}` },
@@ -63,16 +65,29 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
             <LocaleSwitcher />
                   <motion.button
                     onClick={toggleCart}
-                    className="relative p-2 rounded-full text-stone-600 hover:bg-yellow-50 hover:text-yellow-600 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+                    className={`relative p-2 rounded-full text-stone-600 hover:bg-yellow-50 hover:text-yellow-600 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none ${
+                      feedbackState.isAnimating ? 'animate-pulse bg-green-100 text-green-600' : ''
+                    }`}
                     aria-label="Abrir carrito de compras"
                     style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    animate={feedbackState.isAnimating ? { 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0]
+                    } : {}}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
                   >
-                    <ShoppingCart className="w-5 h-5 transition-colors duration-300" />
+                    <ShoppingCart className={`w-5 h-5 transition-colors duration-300 ${
+                      feedbackState.isAnimating ? 'animate-bounce' : ''
+                    }`} />
                     {cartState.items.length > 0 && (
                       <motion.span
-                        className="absolute -top-1 -right-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold shadow-sm"
+                        className={`absolute -top-1 -right-1 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold shadow-sm ${
+                          feedbackState.isAnimating 
+                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 animate-ping' 
+                            : 'bg-gradient-to-r from-yellow-500 to-amber-500'
+                        }`}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", stiffness: 500, damping: 30 }}

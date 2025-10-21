@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Heart, ShoppingCart, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useCartFeedback } from '@/hooks/useCartFeedback';
 import { products, formatPrice } from '@/lib/products';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -23,6 +24,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const { success } = useToastContext();
+  const { triggerCartAnimation } = useCartFeedback();
 
   // Manejar parámetros de URL
   useEffect(() => {
@@ -56,16 +58,19 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   const handleAddToCart = async (product: any) => {
     setAddingToCart(product.id);
     addItem(product);
-    
+
+    // Trigger visual feedback
+    triggerCartAnimation(locale === 'en' ? product.nameEn : product.name);
+
     // Simular delay para feedback visual
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     success(
       locale === 'en' ? 'Added to Cart' : 'Agregado al Carrito',
       `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been added to your cart' : 'ha sido agregado a tu carrito'}`,
       <ShoppingCart className="w-5 h-5" />
     );
-    
+
     setAddingToCart(null);
   };
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Star, ShoppingCart, Heart, CheckCircle } from 'lucide-react';
 import { getFeaturedProducts, formatPrice } from '@/lib/products';
+import { useCartFeedback } from '@/hooks/useCartFeedback';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useToastContext } from './ToastProvider';
@@ -18,6 +19,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const { success } = useToastContext();
+  const { triggerCartAnimation } = useCartFeedback();
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const [addingToCart, setAddingToCart] = useState<number | null>(null);
   const [addingToFavorites, setAddingToFavorites] = useState<number | null>(null);
@@ -26,15 +28,18 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
     setAddingToCart(product.id);
     addItem(product);
     
+    // Trigger visual feedback
+    triggerCartAnimation(locale === 'en' ? product.nameEn : product.name);
+    
     // Simular delay para feedback visual
     await new Promise(resolve => setTimeout(resolve, 500));
-    
+
     success(
       locale === 'en' ? 'Added to Cart' : 'Agregado al Carrito',
       `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been added to your cart' : 'ha sido agregado a tu carrito'}`,
       <ShoppingCart className="w-5 h-5" />
     );
-    
+
     setAddingToCart(null);
   };
 
