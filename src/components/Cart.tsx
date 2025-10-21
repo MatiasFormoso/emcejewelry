@@ -10,13 +10,15 @@ import type { Dict, Locale } from '@/i18n/config';
 interface CartProps {
   t: Dict;
   locale: Locale;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default function Cart({ t, locale }: CartProps) {
-  const { state, removeItem, updateQuantity, clearCart, closeCart, getTotalPrice } = useCart();
+export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
+  const { state: cartState, removeItem, updateQuantity, clearCart, getTotalPrice } = useCart();
 
   const handleWhatsAppOrder = () => {
-    const items = state.items.map(item => 
+    const items = cartState.items.map(item => 
       `• ${item.product.name} (${locale === 'en' ? item.product.nameEn : item.product.name}) - Cantidad: ${item.quantity} - Precio: ${formatPrice(item.product.price)}`
     ).join('\n');
     
@@ -29,14 +31,14 @@ export default function Cart({ t, locale }: CartProps) {
     }
   };
 
-  if (!state.isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={closeCart}
+        onClick={onClose}
       />
       
       {/* Cart Panel */}
@@ -48,8 +50,8 @@ export default function Cart({ t, locale }: CartProps) {
               {locale === 'en' ? 'Shopping Cart' : 'Carrito de Compras'}
             </h2>
             <button
-              onClick={closeCart}
-              className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+              onClick={onClose}
+              className="rounded-full p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
             >
               <X className="h-5 w-5" />
             </button>
@@ -57,22 +59,26 @@ export default function Cart({ t, locale }: CartProps) {
 
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto px-6 py-4">
-            {state.items.length === 0 ? (
+            {cartState.items.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center">
                 <ShoppingBag className="h-16 w-16 text-gray-300 mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                <p className="text-gray-500 text-lg mb-2">
                   {locale === 'en' ? 'Your cart is empty' : 'Tu carrito está vacío'}
-                </h3>
-                <p className="text-gray-500">
-                  {locale === 'en' ? 'Add some beautiful jewelry to get started' : 'Agrega algunas joyas hermosas para comenzar'}
+                </p>
+                <p className="text-gray-400 text-sm">
+                  {locale === 'en' ? 'Add some items to get started' : 'Agrega algunos productos para comenzar'}
                 </p>
               </div>
             ) : (
               <div className="space-y-4">
-                {state.items.map((item) => (
-                  <div key={item.product.id} className="flex items-center space-x-4 rounded-lg border border-gray-200 p-4">
-                    <div className="h-16 w-16 bg-gray-100 rounded-lg flex items-center justify-center">
-                      <span className="text-2xl">💎</span>
+                {cartState.items.map((item) => (
+                  <div key={item.product.id} className="flex items-center space-x-4 border-b border-gray-100 pb-4">
+                    <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
+                      <img
+                        src={item.product.images?.[0] || '/placeholder-jewelry.jpg'}
+                        alt={item.product.name}
+                        className="h-full w-full object-cover object-center"
+                      />
                     </div>
                     
                     <div className="flex-1 min-w-0">
@@ -115,24 +121,19 @@ export default function Cart({ t, locale }: CartProps) {
           </div>
 
           {/* Footer */}
-          {state.items.length > 0 && (
-            <div className="border-t border-gray-200 px-6 py-4">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-lg font-semibold text-gray-900">
-                  {locale === 'en' ? 'Total' : 'Total'}
-                </span>
-                <span className="text-lg font-bold text-primary">
-                  {formatPrice(getTotalPrice())}
-                </span>
+          {cartState.items.length > 0 && (
+            <div className="border-t border-gray-200 px-6 py-4 space-y-4">
+              <div className="flex justify-between text-lg font-semibold">
+                <span>{locale === 'en' ? 'Total:' : 'Total:'}</span>
+                <span>{formatPrice(getTotalPrice())}</span>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <button
                   onClick={handleWhatsAppOrder}
-                  className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
+                  className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 transition-colors"
                 >
-                  <span>📱</span>
-                  <span>{locale === 'en' ? 'Order via WhatsApp' : 'Comprar por WhatsApp'}</span>
+                  {locale === 'en' ? 'Order via WhatsApp' : 'Pedir por WhatsApp'}
                 </button>
                 
                 <button

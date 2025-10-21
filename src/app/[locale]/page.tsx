@@ -1,6 +1,5 @@
 // src/app/[locale]/page.tsx
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import FeaturedCollections from "@/components/FeaturedCollections";
 import AboutSection from "@/components/AboutSection";
@@ -39,7 +38,6 @@ export default async function HomeByLocale({ params }: Props) {
 
   return (
     <main>
-      <Header t={t} locale={locale} />
       <HeroSection t={t} locale={locale} />
       <FeaturedCollections t={t} locale={locale} />
       <AboutSection t={t} locale={locale} />
