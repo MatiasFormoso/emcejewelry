@@ -1,5 +1,4 @@
 // src/app/[locale]/favoritos/page.tsx
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FavoritesList from "@/components/FavoritesList";
 import { getDictionary, type Dict, type Locale } from "@/i18n/config";
@@ -29,7 +28,6 @@ export default async function FavoritesPage({ params }: Props) {
 
   return (
     <main>
-      <Header t={t} locale={locale} />
       <FavoritesList t={t} locale={locale} />
       <Footer t={t} locale={locale} />
     </main>
