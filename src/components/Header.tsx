@@ -41,7 +41,7 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           <Link
             href={`/${locale}`}
-            className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none hover:scale-105"
+            className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none hover-scale-102"
             style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
             <span className="bg-gradient-to-r from-stone-900 via-stone-800 to-stone-900 bg-clip-text text-transparent hover:from-yellow-600 hover:via-yellow-500 hover:to-yellow-600 transition-all duration-300">
@@ -55,7 +55,7 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-stone-600 hover:text-yellow-600 transition-all duration-300 font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none hover:scale-105"
+                className="text-stone-600 hover:text-yellow-600 transition-all duration-300 font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none hover-scale-102"
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >
                 {item.name}
@@ -73,10 +73,10 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     animate={feedbackState.isAnimating ? { 
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 5, -5, 0]
+                      scale: [1, 1.05, 1],
+                      rotate: [0, 2, -2, 0]
                     } : {}}
-                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                   >
                     <ShoppingCart className={`w-5 h-5 transition-colors duration-300 ${
                       feedbackState.isAnimating ? 'animate-bounce' : ''
@@ -90,15 +90,15 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
                         }`}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 25 }}
                       >
                         {cartState.items.length}
                       </motion.span>
                     )}
                   </motion.button>
                   <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
                     className="relative"
                   >
                     <Link

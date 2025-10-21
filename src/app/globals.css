@@ -682,8 +682,10 @@ html {
   animation: slideOut 0.3s ease-in forwards;
 }
 
-/* Ensure animations work in production */
-* {
+/* Ensure animations work in production - but only for specific elements */
+.animate-shimmer,
+.animate-slide-in,
+.animate-slide-out {
   animation-fill-mode: both;
 }
 
@@ -694,8 +696,33 @@ html {
   }
 }
 
-/* Mobile touch targets optimization */
+/* Optimized scale transforms for mobile */
+.hover-scale-102:hover {
+  transform: scale(1.02);
+}
+
+.hover-scale-103:hover {
+  transform: scale(1.03);
+}
+
+/* Mobile performance optimizations */
 @media (max-width: 768px) {
+  /* Improve scroll performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Reduce motion for better performance */
+  .animate-shimmer {
+    animation-duration: 3s;
+  }
+  
+  /* Optimize transforms for mobile */
+  .hover-luxury:hover {
+    transform: translateY(-1px);
+  }
+  
   /* Ensure minimum touch target size */
   button, 
   [role="button"], 
@@ -734,6 +761,13 @@ html {
   .mobile-menu a {
     padding: 0.75rem 1rem;
     min-height: 48px;
+  }
+  
+  /* Disable heavy animations on mobile */
+  .animate-bounce,
+  .animate-ping,
+  .animate-pulse {
+    animation-duration: 1s;
   }
 }
 

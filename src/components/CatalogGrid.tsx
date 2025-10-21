@@ -115,8 +115,8 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+                     whileHover={{ scale: 1.02 }}
+                     whileTap={{ scale: 0.98 }}
             >
               {category.label}
             </motion.button>
@@ -138,10 +138,10 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                 delay: index * 0.1,
                 ease: "easeOut"
               }}
-              whileHover={{ 
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
+                     whileHover={{
+                       y: -3,
+                       transition: { duration: 0.2 }
+                     }}
             >
               {/* Product Image */}
               <div className="relative h-80 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
@@ -178,8 +178,8 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                         onClick={() => handleAddToCart(product)}
                         disabled={addingToCart === product.id}
                         className="bg-white text-black px-4 py-2 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
+                     whileHover={{ scale: 1.02 }}
+                     whileTap={{ scale: 0.98 }}
                       >
                         {addingToCart === product.id ? (
                           <motion.div
