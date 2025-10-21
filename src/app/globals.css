@@ -620,8 +620,35 @@ html {
   }
 }
 
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .animate-shimmer {
   animation: shimmer 2s infinite;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Ensure animations work in production */
+* {
+  animation-fill-mode: both;
+}
+
+/* Fallback for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
 }
 
 /* Mobile touch targets optimization */
@@ -660,8 +687,8 @@ html {
   }
   
   /* Improve mobile menu touch targets */
-  .md\\:hidden button,
-  .md\\:hidden a {
+  .mobile-menu button,
+  .mobile-menu a {
     padding: 0.75rem 1rem;
     min-height: 48px;
   }

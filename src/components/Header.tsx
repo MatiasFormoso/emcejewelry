@@ -142,7 +142,7 @@ export default function Header({ t, locale, toggleCart }: HeaderProps) {
 
         {/* Mobile Menu */}
         <motion.div 
-          className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-stone-200/30 shadow-lg"
+          className="mobile-menu md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-stone-200/30 shadow-lg"
           initial={{ opacity: 0, height: 0 }}
           animate={{ 
             opacity: isMenuOpen ? 1 : 0, 

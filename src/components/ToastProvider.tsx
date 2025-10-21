@@ -12,10 +12,29 @@ interface ToastContextType {
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const { success, error, info } = useToast();
+  const toastHook = useToast();
+  
+  // Fallback functions in case useToast fails
+  const fallbackSuccess = (title: string, message: string) => {
+    console.log(`Toast Success: ${title} - ${message}`);
+  };
+  
+  const fallbackError = (title: string, message: string) => {
+    console.log(`Toast Error: ${title} - ${message}`);
+  };
+  
+  const fallbackInfo = (title: string, message: string) => {
+    console.log(`Toast Info: ${title} - ${message}`);
+  };
+  
+  const value = {
+    success: toastHook?.success || fallbackSuccess,
+    error: toastHook?.error || fallbackError,
+    info: toastHook?.info || fallbackInfo,
+  };
   
   return (
-    <ToastContext.Provider value={{ success, error, info }}>
+    <ToastContext.Provider value={value}>
       {children}
     </ToastContext.Provider>
   );

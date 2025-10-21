@@ -75,7 +75,12 @@ function ToastComponent({ toast, onRemove }: ToastProps) {
         relative overflow-hidden rounded-xl shadow-lg border backdrop-blur-sm
         ${styles.bg} ${styles.border}
         min-w-[320px] max-w-[400px] w-full
+        animate-slide-in
       `}
+      style={{
+        // Fallback CSS animation
+        animation: 'slideIn 0.3s ease-out',
+      }}
     >
       {/* Shimmer effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-shimmer" />
@@ -129,8 +134,13 @@ interface ToastContainerProps {
 }
 
 export default function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
+  // Debug: Log toasts in production
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production') {
+    console.log('ToastContainer: Current toasts:', toasts.length);
+  }
+  
   return (
-        <div className="fixed top-20 right-4 z-50 space-y-3 pointer-events-none">
+    <div className="fixed top-20 right-4 z-50 space-y-3 pointer-events-none">
       <AnimatePresence mode="popLayout">
         {toasts.map((toast) => (
           <div key={toast.id} className="pointer-events-auto">
