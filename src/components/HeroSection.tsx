@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from 'next/link';
 import { Crown, Heart } from 'lucide-react';
 import type { Dict, Locale } from '@/i18n/config';
@@ -9,10 +9,6 @@ import type { Dict, Locale } from '@/i18n/config';
 type HeroSectionProps = { t: Dict; locale: Locale };
 
 export default function HeroSection({ t, locale }: HeroSectionProps) {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, -20]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.95]);
-
   return (
     <section id="hero" className="relative overflow-hidden">
       <motion.div
@@ -20,7 +16,6 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
         initial={{ scale: 1.05, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        style={{ y, opacity }}
       >
         <motion.div
           className="h-full w-full"
