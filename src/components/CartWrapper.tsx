@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Header from './Header';
 import Cart from './Cart';
-import ToastContainer, { useToast } from './Toast';
+import SimpleToastContainer, { useSimpleToast } from './SimpleToast';
 import { ToastProvider } from './ToastProvider';
 import type { Dict, Locale } from '@/i18n/config';
 
@@ -15,7 +15,7 @@ type CartWrapperProps = {
 
 function CartWrapperContent({ children, t, locale }: CartWrapperProps) {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { toasts, removeToast } = useToast();
+  const { toasts, removeToast } = useSimpleToast();
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -26,7 +26,7 @@ function CartWrapperContent({ children, t, locale }: CartWrapperProps) {
       <Header t={t} locale={locale} toggleCart={toggleCart} />
       {children}
       <Cart t={t} locale={locale} isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
-      <ToastContainer toasts={toasts} onRemove={removeToast} />
+      <SimpleToastContainer toasts={toasts} onRemove={removeToast} />
     </>
   );
 }

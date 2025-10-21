@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, ReactNode } from 'react';
-import { useToast, Toast } from './Toast';
+import { useSimpleToast } from './SimpleToast';
 
 interface ToastContextType {
   success: (title: string, message: string, icon?: React.ReactNode) => void;
@@ -12,25 +12,12 @@ interface ToastContextType {
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const toastHook = useToast();
-  
-  // Fallback functions in case useToast fails
-  const fallbackSuccess = (title: string, message: string) => {
-    console.log(`Toast Success: ${title} - ${message}`);
-  };
-  
-  const fallbackError = (title: string, message: string) => {
-    console.log(`Toast Error: ${title} - ${message}`);
-  };
-  
-  const fallbackInfo = (title: string, message: string) => {
-    console.log(`Toast Info: ${title} - ${message}`);
-  };
+  const { success, error, info } = useSimpleToast();
   
   const value = {
-    success: toastHook?.success || fallbackSuccess,
-    error: toastHook?.error || fallbackError,
-    info: toastHook?.info || fallbackInfo,
+    success,
+    error,
+    info,
   };
   
   return (
