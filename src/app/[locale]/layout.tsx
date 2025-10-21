@@ -35,12 +35,12 @@ export default async function LocaleLayout({
   
   return (
     <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased bg-white text-gray-900">
+      <body className="font-sans antialiased bg-stone-50 text-stone-900 overflow-x-hidden">
         <CartProvider>
           <FavoritesProvider>
             <ToastProvider>
               <Header t={t} locale={locale as Locale} />
-              <main className="pt-16">
+              <main className="min-h-screen">
                 {children}
               </main>
               <Cart t={t} locale={locale as Locale} />

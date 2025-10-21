@@ -36,7 +36,7 @@ export default async function HomeByLocale({ params }: Props) {
   const t: Dict = await getDictionary(locale);
 
   return (
-    <main>
+    <main className="min-h-screen bg-stone-50 text-stone-900 overflow-x-hidden">
       <HeroSection t={t} locale={locale} />
       <FeaturedCollections t={t} locale={locale} />
       <AboutSection t={t} locale={locale} />

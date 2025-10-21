@@ -11,45 +11,64 @@ import type { Dict, Locale } from '@/i18n/config';
 type HeaderProps = { t: Dict; locale: Locale };
 
 export default function Header({ t, locale }: HeaderProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { state: cartState } = useCart();
   const { state: favoritesState } = useFavorites();
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
   const navigation = [
-    { name: t.nav.home, href: `/${locale}` },
-    { name: t.nav.catalog, href: `/${locale}/catalogo` },
-    { name: t.nav.collections, href: `/${locale}/colecciones` },
-    { name: t.nav.about, href: `/${locale}/nosotros` },
-    { name: t.nav.contact, href: `/${locale}/contacto` },
+    { name: t.nav.home, href: `/${locale}`, onClick: () => scrollToSection('hero') },
+    { name: t.nav.about, href: `/${locale}/nosotros`, onClick: () => scrollToSection('about') },
+    { name: t.nav.catalog, href: `/${locale}/catalogo`, onClick: () => scrollToSection('catalog') },
+    { name: t.nav.collections, href: `/${locale}/colecciones`, onClick: () => scrollToSection('collections') },
+    { name: t.nav.contact, href: `/${locale}/contacto`, onClick: () => scrollToSection('contact') },
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <nav id="site-nav" className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200/50 safe-area-top">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link
-            href={`/${locale}`}
-            className="text-xl font-bold text-gray-900 hover:text-yellow-600 transition-colors"
+          <button
+            onClick={() => scrollToSection('hero')}
+            className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-colors duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+            style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
             EMC Jewelry
-          </Link>
-
+          </button>
+          
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                href={item.href}
-                className="text-gray-600 hover:text-yellow-600 transition-colors font-medium"
+                onClick={item.onClick}
+                className="text-stone-600 hover:text-stone-900 transition-all duration-300 font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+                style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >
                 {item.name}
-              </Link>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+              </button>
             ))}
             <LocaleSwitcher />
-            
             <button
-              onClick={() => setIsCartOpen(true)}
-              className="relative p-2 text-gray-600 hover:text-yellow-600 transition-colors"
+              onClick={toggleCart}
+              className="relative p-2 text-stone-600 hover:text-yellow-600 transition-colors duration-300"
             >
               <ShoppingCart className="w-5 h-5" />
               {cartState.items.length > 0 && (
@@ -58,10 +77,9 @@ export default function Header({ t, locale }: HeaderProps) {
                 </span>
               )}
             </button>
-            
             <Link
               href={`/${locale}/favoritos`}
-              className="relative p-2 text-gray-600 hover:text-red-600 transition-colors"
+              className="relative p-2 text-stone-600 hover:text-red-600 transition-colors duration-300"
             >
               <Heart className="w-5 h-5" />
               {favoritesState.items.length > 0 && (
@@ -70,14 +88,97 @@ export default function Header({ t, locale }: HeaderProps) {
                 </span>
               )}
             </Link>
+            <a
+              href="https://wa.me/573001234567?text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg"
+            >
+              Contactar
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2 text-gray-600 hover:text-gray-900">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <button
+            onClick={toggleMenu}
+            className="md:hidden p-2 rounded-lg hover:bg-stone-100 transition-colors duration-300"
+            aria-label="Abrir menú"
+          >
+            <div className="w-6 h-6 flex flex-col justify-center items-center">
+              <span
+                className={`block w-5 h-0.5 bg-stone-700 transition-all duration-300 ${
+                  isMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+                }`}
+              />
+              <span
+                className={`block w-5 h-0.5 bg-stone-700 mt-1 transition-all duration-300 ${
+                  isMenuOpen ? 'opacity-0' : ''
+                }`}
+              />
+              <span
+                className={`block w-5 h-0.5 bg-stone-700 mt-1 transition-all duration-300 ${
+                  isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+                }`}
+              />
+            </div>
           </button>
+        </div>
+
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-stone-200/30 shadow-lg transition-all duration-300 ${
+            isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
+        >
+          <div className="px-4 py-6 space-y-2">
+            {navigation.map((item) => (
+              <button
+                key={item.name}
+                onClick={item.onClick}
+                className="block w-full text-left text-stone-600 hover:text-stone-900 transition-all duration-300 font-medium py-4 px-3 rounded-xl hover:bg-stone-50 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+                style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+              >
+                {item.name}
+              </button>
+            ))}
+            
+            {/* Language Switcher */}
+            <div className="px-3 pt-4 border-t border-stone-200/50">
+              <LocaleSwitcher />
+            </div>
+
+            {/* Action Buttons */}
+            <div className="px-3 pt-4 flex justify-between items-center space-x-4">
+              <button
+                onClick={() => { toggleCart(); setIsMenuOpen(false); }}
+                className="relative flex items-center justify-center p-3 rounded-xl text-stone-600 hover:bg-green-50 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none border border-transparent hover:border-green-200 flex-1"
+                style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+              >
+                <ShoppingCart className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">{t.nav.cart}</span>
+                {cartState.items.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">
+                    {cartState.items.length}
+                  </span>
+                )}
+              </button>
+
+              <Link
+                href={`/${locale}/favoritos`}
+                className="relative flex items-center justify-center p-3 rounded-xl text-stone-600 hover:bg-red-50 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none border border-transparent hover:border-red-200 w-full"
+                style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Heart className="w-5 h-5 mr-2" />
+                <span className="text-sm font-medium">{t.nav.favorites}</span>
+                {favoritesState.items.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">
+                    {favoritesState.items.length}
+                  </span>
+                )}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
