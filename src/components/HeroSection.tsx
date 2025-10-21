@@ -19,7 +19,7 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
         priority
         className="h-full w-full object-cover object-[center_75%]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-slate-900/40 to-slate-800/20" />
       <div className="absolute inset-0 flex items-center justify-center pt-16">
         <div className="text-center text-white px-6 max-w-6xl w-full">
           <motion.div
