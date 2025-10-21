@@ -25,9 +25,9 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
 
   const navigation = [
     { name: t.nav.home, href: `/${locale}` },
-    { name: t.nav.about, href: `/${locale}/nosotros` },
     { name: t.nav.catalog, href: `/${locale}/catalogo` },
     { name: t.nav.collections, href: `/${locale}/colecciones` },
+    { name: t.nav.about, href: `/${locale}/nosotros` },
     { name: t.nav.contact, href: `/${locale}/contacto` },
   ];
 
