@@ -1,5 +1,4 @@
 // src/app/[locale]/catalogo/page.tsx
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CatalogGrid from "@/components/CatalogGrid";
 import { getDictionary, type Dict, type Locale } from "@/i18n/config";
@@ -29,8 +28,6 @@ export default async function CatalogPage({ params }: Props) {
 
   return (
     <main>
-      <Header t={t} locale={locale} />
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/5 to-yellow-400/5 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
