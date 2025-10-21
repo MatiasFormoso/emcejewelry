@@ -25,10 +25,10 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col justify-center min-h-screen py-12 sm:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col justify-center min-h-screen pt-20 pb-12 sm:pt-24 sm:pb-16">
         <div className="animate-elegant-fade-in">
           {/* Badge - Minimalist Style */}
-          <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/10">
+          <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm rounded-full px-4 py-2 mb-4 sm:mb-6 border border-white/10">
             <Sparkles className="w-3 h-3 text-primary" />
             <span className="text-white/90 text-xs font-light tracking-wider uppercase">{t.hero.badge}</span>
           </div>
