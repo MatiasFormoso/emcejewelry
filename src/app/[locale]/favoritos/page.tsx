@@ -35,3 +35,4 @@ export default async function FavoritesPage({ params }: Props) {
     </main>
   );
 }
+

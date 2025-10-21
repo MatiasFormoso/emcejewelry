@@ -145,3 +145,4 @@ export default function SearchModal({ isOpen, onClose, t, locale }: SearchModalP
     </div>
   );
 }
+

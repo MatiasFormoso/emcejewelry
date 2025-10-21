@@ -157,3 +157,4 @@ export default function FavoritesList({ t, locale }: FavoritesListProps) {
     </section>
   );
 }
+
