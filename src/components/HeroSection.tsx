@@ -71,7 +71,7 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
            </motion.div>
          </div>
 
-      <div className="absolute inset-0 flex items-center justify-center">
+         <div className="absolute inset-0 flex items-center justify-center pt-16 sm:pt-12">
         <div className="text-center text-white px-6 max-w-6xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

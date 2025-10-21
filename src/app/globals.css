@@ -400,13 +400,12 @@ html {
   transform: translateY(-2px) !important;
 }
 
-/* Hero full screen implementation - FIXED FOR EMBEDDED BROWSERS */
+/* Hero full screen implementation - SAME AS LANDING */
 #hero {
   position: relative;
   overflow: hidden;
   height: 100vh;
   min-height: 100vh;
-  max-height: 100vh;
 }
 
 #hero img {
@@ -417,7 +416,7 @@ html {
   object-fit: cover;
 }
 
-/* Para navegadores integrados - prevenir cambios de viewport */
+/* Mobile optimizations */
 @media (max-width: 768px) {
   html {
     height: 100%;
@@ -432,24 +431,11 @@ html {
   #hero {
     height: 100vh !important;
     min-height: 100vh !important;
-    max-height: 100vh !important;
-    position: relative;
-    overflow: hidden;
   }
   
   #hero img {
     height: 100vh !important;
     min-height: 100vh !important;
-    max-height: 100vh !important;
-  }
-}
-
-/* Fallback para navegadores que no soportan vh */
-@supports not (height: 100vh) {
-  #hero {
-    height: 100vh;
-    min-height: 100vh;
-    max-height: 100vh;
   }
 }
 
