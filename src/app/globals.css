@@ -1,19 +1,47 @@
 @import "tailwindcss";
 
 :root {
+  /* Luxury Background */
   --background: #fefefe;
   --foreground: #1a1a1a;
-  --primary: #d4af37; /* Oro elegante */
+  
+  /* Sophisticated Gold Palette */
+  --primary: #d4af37; /* Classic Gold */
   --primary-foreground: #1a1a1a;
-  --secondary: #8b4513; /* Bronce cálido */
+  --primary-light: #f4e4a6;
+  --primary-dark: #b8941f;
+  
+  /* Elegant Secondary Colors */
+  --secondary: #8b7355; /* Warm Bronze */
   --secondary-foreground: #ffffff;
-  --accent: #c0c0c0; /* Plata brillante */
+  --secondary-light: #a68b6b;
+  --secondary-dark: #6b5a42;
+  
+  /* Refined Accents */
+  --accent: #e8b4b8; /* Rose Gold */
   --accent-foreground: #1a1a1a;
+  --accent-light: #f2d1d4;
+  --accent-dark: #d49ca1;
+  
+  /* Sophisticated Neutrals */
   --muted: #f8f9fa;
-  --muted-foreground: #6c757d;
-  --border: #e9ecef;
+  --muted-foreground: #5f6368;
+  --muted-light: #ffffff;
+  --muted-dark: #e8eaed;
+  
+  /* Elegant Borders */
+  --border: #e8eaed;
+  --border-light: #f1f3f4;
+  --border-dark: #dadce0;
+  
+  /* Refined Inputs */
   --input: #ffffff;
+  --input-border: #dadce0;
+  --input-focus: #d4af37;
+  
+  /* Focus Ring */
   --ring: #d4af37;
+  --ring-light: #f4e4a6;
   --radius: 0.75rem;
 }
 
