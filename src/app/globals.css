@@ -400,7 +400,7 @@ html {
   transform: translateY(-2px) !important;
 }
 
-/* Hero full screen implementation - Optimized for mobile and embedded browsers */
+/* Hero full screen implementation from demo-cafe - PROVEN TO WORK */
 #hero {
   position: relative;
   overflow: hidden;
@@ -417,31 +417,31 @@ html {
   object-fit: cover;
 }
 
-/* Mobile specific fixes */
+/* Mobile responsive hero section */
 @media (max-width: 768px) {
-  html {
-    height: 100%;
-    overflow-x: hidden;
-  }
-  
-  body {
-    height: 100%;
-    overflow-x: hidden;
-  }
-  
   #hero {
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: 100dvh !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    width: 100vw !important;
     position: relative;
     overflow: hidden;
   }
-  
+
   #hero img {
-    height: 100% !important;
-    min-height: 100% !important;
-    max-height: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     object-fit: cover !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* Ensure full viewport on mobile */
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -512,7 +512,7 @@ html {
     }
   }
 
-/* iPhone specific header spacing */
+  /* iPhone specific header spacing */
   nav {
     padding-left: max(1.5rem, env(safe-area-inset-left));
     padding-right: max(1.5rem, env(safe-area-inset-right));
@@ -529,50 +529,6 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-  }
-
-  /* Hero content mobile optimization */
-  #hero .absolute.inset-0 {
-    padding-top: max(3rem, env(safe-area-inset-top));
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  }
-
-  /* Ensure content fits within viewport */
-  #hero .flex.flex-col.justify-center {
-    min-height: 0;
-    max-height: 100%;
-    overflow: hidden;
-  }
-
-  /* Mobile text scaling */
-  #hero h1 {
-    font-size: clamp(1.5rem, 8vw, 3rem) !important;
-    line-height: 1.1 !important;
-  }
-
-  #hero p {
-    font-size: clamp(0.875rem, 4vw, 1.125rem) !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Mobile button optimization */
-  #hero button, #hero a {
-    font-size: clamp(0.75rem, 3vw, 0.875rem) !important;
-    padding: 0.75rem 1.5rem !important;
-  }
-
-  /* Mobile card optimization */
-  #hero .grid {
-    gap: 0.75rem !important;
-  }
-
-  #hero .grid > div {
-    padding: 1rem !important;
-  }
-
-  #hero .grid h3 {
-    font-size: 0.75rem !important;
-    margin-bottom: 0.25rem !important;
   }
 }
 
