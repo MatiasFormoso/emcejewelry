@@ -71,7 +71,7 @@ const es: Dict = {
     },
     info: {
       address: "Dirección: Por definir",
-      phone: "Teléfono: +1 (555) 123-4567",
+      phone: "Teléfono: +971 54 708 3607",
       email: "Email: info@emcjewelry.com",
       hours: "Horarios: Lun-Vie 9:00-18:00",
     },

@@ -71,7 +71,7 @@ const en: Dict = {
     },
     info: {
       address: "Address: To be defined",
-      phone: "Phone: +1 (555) 123-4567",
+      phone: "Phone: +971 54 708 3607",
       email: "Email: info@emcjewelry.com",
       hours: "Hours: Mon-Fri 9:00-18:00",
     },

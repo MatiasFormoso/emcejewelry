@@ -3,7 +3,7 @@
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppFloat() {
-  const phoneNumber = "5491112345678"; // Número de WhatsApp (formato internacional)
+  const phoneNumber = "971547083607"; // Número de WhatsApp (formato internacional)
   const message = "Hola! Me interesa conocer más sobre sus joyas.";
 
   const handleWhatsAppClick = () => {

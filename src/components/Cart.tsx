@@ -24,7 +24,7 @@ export default function Cart({ t, locale }: CartProps) {
     const message = `Hola! Me interesa realizar una compra:\n\n${items}\n\nTotal: ${total}\n\n¿Podrían ayudarme con el proceso de compra?`;
     
     if (typeof window !== 'undefined') {
-      const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/971547083607?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
     }
   };
