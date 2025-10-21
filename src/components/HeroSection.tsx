@@ -57,14 +57,14 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
           >
             <Link
               href={`/${locale}/catalogo`}
-              className="inline-block bg-white text-stone-900 hover:bg-stone-100 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:scale-105 flex items-center justify-center"
+              className="bg-white text-stone-900 hover:bg-stone-100 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:shadow-2xl hover:scale-105 flex items-center justify-center"
             >
               <Crown className="w-5 h-5 mr-2" />
               {t.hero.ctaPrimary}
             </Link>
             <Link
               href={`/${locale}/colecciones`}
-              className="inline-block border-2 border-white/40 hover:border-white hover:bg-white/10 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 backdrop-blur-sm hover:scale-105 flex items-center justify-center"
+              className="border-2 border-white/40 hover:border-white hover:bg-white/10 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 backdrop-blur-sm hover:scale-105 flex items-center justify-center"
             >
               <Heart className="w-5 h-5 mr-2" />
               {t.hero.ctaSecondary}
@@ -73,20 +73,22 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
         </div>
       </div>
       {/* Scroll indicator - Solo desktop */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center z-10 hidden md:flex">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
-        >
+      <div className="absolute bottom-8 left-0 right-0 z-10 hidden md:block">
+        <div className="flex justify-center">
           <motion.div
-            className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.2 }}
           >
-            <div className="w-1 h-3 bg-white/60 rounded-full mt-2"></div>
+            <motion.div
+              className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="w-1 h-3 bg-white/60 rounded-full mt-2"></div>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
