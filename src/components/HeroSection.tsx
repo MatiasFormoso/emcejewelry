@@ -10,7 +10,7 @@ type HeroSectionProps = { t: Dict; locale: Locale };
 
 export default function HeroSection({ t, locale }: HeroSectionProps) {
   return (
-    <section id="hero" className="relative overflow-hidden">
+    <section id="hero" className="relative overflow-hidden" style={{ height: '100vh', minHeight: '100vh' }}>
       <Image
         src="/hero.png"
         alt="EMC Jewelry - Luxury Jewelry Collection"

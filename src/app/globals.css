@@ -400,13 +400,13 @@ html {
   transform: translateY(-2px) !important;
 }
 
-/* Hero full screen implementation from demo-cafe - PROVEN TO WORK */
+/* Hero full screen implementation - FIXED FOR EMBEDDED BROWSERS */
 #hero {
   position: relative;
   overflow: hidden;
-  height: 100dvh;
-  min-height: 100dvh;
-  max-height: 100dvh;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
 }
 
 #hero img {
@@ -417,7 +417,7 @@ html {
   object-fit: cover;
 }
 
-/* Mobile specific fixes */
+/* Para navegadores integrados - prevenir cambios de viewport */
 @media (max-width: 768px) {
   html {
     height: 100%;
@@ -430,22 +430,22 @@ html {
   }
   
   #hero {
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-    max-height: 100dvh !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
     position: relative;
     overflow: hidden;
   }
   
   #hero img {
-    height: 100% !important;
-    min-height: 100% !important;
-    max-height: 100% !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
   }
 }
 
-/* Fallback para navegadores que no soportan dvh */
-@supports not (height: 100dvh) {
+/* Fallback para navegadores que no soportan vh */
+@supports not (height: 100vh) {
   #hero {
     height: 100vh;
     min-height: 100vh;
