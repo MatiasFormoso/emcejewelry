@@ -16,14 +16,6 @@ export default function Header({ t, locale }: HeaderProps) {
   const { state: cartState } = useCart();
   const { state: favoritesState } = useFavorites();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMenuOpen(false);
-  };
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -33,37 +25,37 @@ export default function Header({ t, locale }: HeaderProps) {
   };
 
   const navigation = [
-    { name: t.nav.home, href: `/${locale}`, onClick: () => scrollToSection('hero') },
-    { name: t.nav.about, href: `/${locale}/nosotros`, onClick: () => scrollToSection('about') },
-    { name: t.nav.catalog, href: `/${locale}/catalogo`, onClick: () => scrollToSection('catalog') },
-    { name: t.nav.collections, href: `/${locale}/colecciones`, onClick: () => scrollToSection('collections') },
-    { name: t.nav.contact, href: `/${locale}/contacto`, onClick: () => scrollToSection('contact') },
+    { name: t.nav.home, href: `/${locale}` },
+    { name: t.nav.about, href: `/${locale}/nosotros` },
+    { name: t.nav.catalog, href: `/${locale}/catalogo` },
+    { name: t.nav.collections, href: `/${locale}/colecciones` },
+    { name: t.nav.contact, href: `/${locale}/contacto` },
   ];
 
   return (
     <nav id="site-nav" className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200/50 safe-area-top">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <button
-            onClick={() => scrollToSection('hero')}
+          <Link
+            href={`/${locale}`}
             className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-colors duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
             style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
             EMC Jewelry
-          </button>
+          </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <button
+              <Link
                 key={item.name}
-                onClick={item.onClick}
+                href={item.href}
                 className="text-stone-600 hover:text-stone-900 transition-all duration-300 font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >
                 {item.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-              </button>
+              </Link>
             ))}
             <LocaleSwitcher />
             <button
@@ -132,14 +124,15 @@ export default function Header({ t, locale }: HeaderProps) {
         >
           <div className="px-4 py-6 space-y-2">
             {navigation.map((item) => (
-              <button
+              <Link
                 key={item.name}
-                onClick={item.onClick}
+                href={item.href}
                 className="block w-full text-left text-stone-600 hover:text-stone-900 transition-all duration-300 font-medium py-4 px-3 rounded-xl hover:bg-stone-50 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
             
             {/* Language Switcher */}
