@@ -60,14 +60,14 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-20 bg-gradient-to-b from-white to-stone-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-light text-gray-800 mb-6 tracking-tight">
-            <span className="font-normal">{t.featuredCollections.title}</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-stone-800 mb-6 tracking-tight">
+            {t.featuredCollections.title}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-lg text-stone-600 max-w-2xl mx-auto font-light leading-relaxed">
             {t.featuredCollections.subtitle}
           </p>
         </div>
@@ -77,7 +77,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
           {featuredProducts.map((product) => (
             <div
               key={product.id}
-              className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-md transition-all duration-200 ease-out"
             >
               {/* Product Image */}
               <div className="h-64 bg-gray-100 flex items-center justify-center">
@@ -90,17 +90,17 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
 
               {/* Product Info */}
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  {locale === 'en' ? product.nameEn : product.name}
-                </h3>
+                       <h3 className="text-lg font-light text-stone-800 mb-2 tracking-wide">
+                         {locale === 'en' ? product.nameEn : product.name}
+                       </h3>
 
-                <p className="text-gray-600 mb-3 text-sm">
+                <p className="text-stone-600 mb-3 text-sm font-light leading-relaxed">
                   {locale === 'en' ? product.descriptionEn : product.description}
                 </p>
 
                 {/* Price */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xl font-bold text-yellow-600">
+                  <span className="text-xl font-light text-yellow-600 tracking-wide">
                     {formatPrice(product.price)}
                   </span>
                   {product.weight && (
@@ -115,7 +115,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                   <button
                     onClick={() => handleAddToCart(product)}
                     disabled={addingToCart === product.id}
-                    className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center min-h-[44px]"
+                           className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] tracking-wide"
                   >
                     {addingToCart === product.id ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -130,11 +130,11 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                   <button
                     onClick={() => handleToggleFavorite(product)}
                     disabled={addingToFavorites === product.id}
-                    className={`px-3 py-2 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center min-h-[44px] min-w-[44px] ${
-                      isFavorite(product.id)
-                        ? 'bg-red-500 text-white hover:bg-red-600'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                           className={`px-3 py-2 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] min-w-[44px] ${
+                             isFavorite(product.id)
+                               ? 'bg-red-500 text-white hover:bg-red-600'
+                               : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                           }`}
                   >
                     {addingToFavorites === product.id ? (
                       <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -150,10 +150,10 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
 
         {/* CTA */}
         <div className="text-center mt-20">
-          <Link
-            href={`/${locale}/colecciones`}
-            className="group relative px-8 py-3 bg-transparent text-gray-800 rounded-none font-light tracking-wider uppercase text-sm border border-gray-300 hover:bg-gray-800 hover:text-white transition-all duration-300 inline-flex items-center"
-          >
+                 <Link
+                   href={`/${locale}/colecciones`}
+                   className="group relative px-8 py-3 bg-transparent text-stone-800 rounded-sm font-light tracking-wide uppercase text-sm border border-stone-300 hover:bg-stone-800 hover:text-white transition-all duration-200 ease-out inline-flex items-center"
+                 >
             <span className="relative z-10 flex items-center">
               {t.featuredCollections.cta}
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />

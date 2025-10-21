@@ -32,12 +32,12 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
   ];
 
   return (
-    <nav id="site-nav" className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200/50 safe-area-top">
+    <nav id="site-nav" className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-stone-200/30 safe-area-top">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link
             href={`/${locale}`}
-            className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+            className="text-xl font-light text-stone-900 hover:text-yellow-600 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
             style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
             EMC Jewelry
@@ -49,7 +49,7 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-stone-600 hover:text-stone-900 transition-all duration-200 ease-out font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+                className="text-stone-600 hover:text-stone-900 transition-all duration-200 ease-out font-light text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >
                 {item.name}
