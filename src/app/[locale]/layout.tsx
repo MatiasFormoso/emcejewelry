@@ -6,7 +6,7 @@ import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Header from "@/components/Header";
 import Cart from "@/components/Cart";
-import SimpleToastContainer, { ToastProvider } from "@/components/SimpleToast";
+import SimpleToastContainer, { ToastProvider, useSimpleToast } from "@/components/SimpleToast";
 import { getDictionary } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 
@@ -21,6 +21,11 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
+
+function ToastContainer() {
+  const { toasts, removeToast } = useSimpleToast();
+  return <SimpleToastContainer toasts={toasts} onRemove={removeToast} />;
+}
 
 export default async function LocaleLayout({
   children,
@@ -43,7 +48,7 @@ export default async function LocaleLayout({
                 {children}
               </main>
               <Cart t={t} locale={locale as Locale} />
-              <SimpleToastContainer />
+              <ToastContainer />
               <WhatsAppFloat />
             </ToastProvider>
           </FavoritesProvider>

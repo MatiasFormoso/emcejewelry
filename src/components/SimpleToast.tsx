@@ -80,7 +80,7 @@ interface SimpleToastContainerProps {
 export default function SimpleToastContainer({ toasts, onRemove }: SimpleToastContainerProps) {
   return (
     <div className="fixed top-20 right-4 z-50 space-y-3 pointer-events-none">
-      {toasts.map((toast) => (
+      {toasts?.map((toast) => (
         <div key={toast.id} className="pointer-events-auto">
           <ToastComponent toast={toast} onRemove={onRemove} />
         </div>
