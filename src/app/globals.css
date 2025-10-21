@@ -774,11 +774,11 @@ html {
   }
   
   /* Better hover states for mobile */
-  .hover\\:scale-105:hover {
+  .hover-scale-105:hover {
     transform: scale(1.02);
   }
   
-  .hover\\:scale-110:hover {
+  .hover-scale-110:hover {
     transform: scale(1.05);
   }
 }
