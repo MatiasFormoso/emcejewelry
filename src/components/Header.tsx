@@ -8,20 +8,19 @@ import { useFavorites } from '@/contexts/FavoritesContext';
 import LocaleSwitcher from './LocaleSwitcher';
 import type { Dict, Locale } from '@/i18n/config';
 
-type HeaderProps = { t: Dict; locale: Locale };
+type HeaderProps = { 
+  t: Dict; 
+  locale: Locale;
+  onToggleCart: () => void;
+};
 
-export default function Header({ t, locale }: HeaderProps) {
+export default function Header({ t, locale, onToggleCart }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const { state: cartState } = useCart();
   const { state: favoritesState } = useFavorites();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
   };
 
   const navigation = [
@@ -59,7 +58,7 @@ export default function Header({ t, locale }: HeaderProps) {
             ))}
             <LocaleSwitcher />
             <button
-              onClick={toggleCart}
+              onClick={onToggleCart}
               className="relative p-2 text-stone-600 hover:text-yellow-600 transition-colors duration-300"
             >
               <ShoppingCart className="w-5 h-5" />
@@ -143,7 +142,7 @@ export default function Header({ t, locale }: HeaderProps) {
             {/* Action Buttons */}
             <div className="px-3 pt-4 flex justify-between items-center space-x-4">
               <button
-                onClick={() => { toggleCart(); setIsMenuOpen(false); }}
+                onClick={() => { onToggleCart(); setIsMenuOpen(false); }}
                 className="relative flex items-center justify-center p-3 rounded-xl text-stone-600 hover:bg-green-50 transition-all duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none border border-transparent hover:border-green-200 flex-1"
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >

@@ -8,11 +8,12 @@ import type { Dict, Locale } from '@/i18n/config';
 
 type CartProps = { 
   t: Dict; 
-  locale: Locale; 
+  locale: Locale;
+  isOpen: boolean;
+  onClose: () => void;
 };
 
-export default function Cart({ t, locale }: CartProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
   const { state: cartState, removeItem, updateQuantity, clearCart, getTotalPrice } = useCart();
 
   const handleWhatsAppOrder = () => {

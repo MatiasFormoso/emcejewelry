@@ -3,11 +3,7 @@ import "../globals.css";
 import { Playfair_Display, Inter } from "next/font/google";
 import { CartProvider } from "@/contexts/CartContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import Header from "@/components/Header";
-import Cart from "@/components/Cart";
-import { ToastProvider } from "@/components/SimpleToast";
-import ToastContainer from "@/components/ToastContainer";
+import CartWrapper from "@/components/CartWrapper";
 import { getDictionary } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 
@@ -38,15 +34,9 @@ export default async function LocaleLayout({
       <body className="font-sans antialiased bg-stone-50 text-stone-900 overflow-x-hidden">
         <CartProvider>
           <FavoritesProvider>
-            <ToastProvider>
-              <Header t={t} locale={locale as Locale} />
-              <main className="min-h-screen">
-                {children}
-              </main>
-              <Cart t={t} locale={locale as Locale} />
-              <ToastContainer />
-              <WhatsAppFloat />
-            </ToastProvider>
+            <CartWrapper t={t} locale={locale as Locale}>
+              {children}
+            </CartWrapper>
           </FavoritesProvider>
         </CartProvider>
       </body>
