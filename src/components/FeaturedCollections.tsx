@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Star, ShoppingCart, Heart } from 'lucide-react';
+import { ArrowRight, Star, ShoppingCart, Heart, CheckCircle } from 'lucide-react';
 import { getFeaturedProducts, formatPrice } from '@/lib/products';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
+import { useToastContext } from './ToastProvider';
 import type { Dict, Locale } from '@/i18n/config';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 type FeaturedCollectionsProps = { t: Dict; locale: Locale };
 
@@ -15,18 +17,49 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
   const featuredProducts = getFeaturedProducts();
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+  const { success } = useToastContext();
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const [addingToCart, setAddingToCart] = useState<number | null>(null);
+  const [addingToFavorites, setAddingToFavorites] = useState<number | null>(null);
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = async (product: any) => {
+    setAddingToCart(product.id);
     addItem(product);
+    
+    // Simular delay para feedback visual
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    success(
+      locale === 'en' ? 'Added to Cart' : 'Agregado al Carrito',
+      `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been added to your cart' : 'ha sido agregado a tu carrito'}`,
+      <ShoppingCart className="w-5 h-5" />
+    );
+    
+    setAddingToCart(null);
   };
 
-  const handleToggleFavorite = (product: any) => {
+  const handleToggleFavorite = async (product: any) => {
+    setAddingToFavorites(product.id);
+    
     if (isFavorite(product.id)) {
       removeFavorite(product.id);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      success(
+        locale === 'en' ? 'Removed from Favorites' : 'Eliminado de Favoritos',
+        `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been removed from favorites' : 'ha sido eliminado de favoritos'}`,
+        <Heart className="w-5 h-5" />
+      );
     } else {
       addFavorite(product);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      success(
+        locale === 'en' ? 'Added to Favorites' : 'Agregado a Favoritos',
+        `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been added to favorites' : 'ha sido agregado a favoritos'}`,
+        <Heart className="w-5 h-5 fill-current" />
+      );
     }
+    
+    setAddingToFavorites(null);
   };
 
   return (
@@ -45,11 +78,22 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProducts.map((product, index) => (
-            <div
+            <motion.div
               key={product.id}
-              className="group relative bg-white border border-gray-200/50 hover:border-primary/30 transition-all duration-500 overflow-hidden"
+              className="group relative bg-white border border-gray-200/50 hover:border-primary/30 transition-all duration-500 overflow-hidden rounded-xl shadow-sm hover:shadow-xl"
               onMouseEnter={() => setHoveredProduct(index)}
               onMouseLeave={() => setHoveredProduct(null)}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                ease: "easeOut"
+              }}
+              whileHover={{ 
+                y: -5,
+                transition: { duration: 0.3 }
+              }}
             >
               {/* Product Image */}
               <div className="relative h-80 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
@@ -62,32 +106,72 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                 </div>
                 
                 {/* Hover Overlay */}
-                <div className={`absolute inset-0 bg-black/20 transition-opacity duration-300 ${
-                  hoveredProduct === index ? 'opacity-100' : 'opacity-0'
-                }`}>
+                <motion.div 
+                  className="absolute inset-0 bg-black/20"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: hoveredProduct === index ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="flex space-x-2">
-                      <button
+                    <motion.div 
+                      className="flex space-x-2"
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ 
+                        y: hoveredProduct === index ? 0 : 20, 
+                        opacity: hoveredProduct === index ? 1 : 0 
+                      }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                    >
+                      <motion.button
                         onClick={() => handleAddToCart(product)}
-                        className="bg-white text-black px-4 py-2 rounded-none font-light tracking-wider uppercase text-xs hover:bg-gray-100 transition-colors duration-300 flex items-center"
+                        disabled={addingToCart === product.id}
+                        className="bg-white text-black px-4 py-2 rounded-lg font-medium tracking-wider uppercase text-xs hover:bg-gray-100 active:scale-95 transition-all duration-200 flex items-center shadow-lg"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <ShoppingCart className="w-3 h-3 mr-1" />
-                        {locale === 'en' ? 'Add to Cart' : 'Agregar'}
-                      </button>
-                      <button 
+                        {addingToCart === product.id ? (
+                          <motion.div
+                            className="w-3 h-3 mr-1 border border-gray-400 border-t-transparent rounded-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                        ) : (
+                          <ShoppingCart className="w-3 h-3 mr-1" />
+                        )}
+                        {addingToCart === product.id 
+                          ? (locale === 'en' ? 'Adding...' : 'Agregando...')
+                          : (locale === 'en' ? 'Add to Cart' : 'Agregar')
+                        }
+                      </motion.button>
+                      
+                      <motion.button 
                         onClick={() => handleToggleFavorite(product)}
-                        className={`px-4 py-2 rounded-none font-light tracking-wider uppercase text-xs transition-colors duration-300 flex items-center ${
+                        disabled={addingToFavorites === product.id}
+                        className={`px-4 py-2 rounded-lg font-medium tracking-wider uppercase text-xs transition-all duration-200 flex items-center shadow-lg ${
                           isFavorite(product.id) 
                             ? 'bg-red-500 text-white border border-red-500 hover:bg-red-600' 
                             : 'bg-transparent border border-white text-white hover:bg-white/10'
                         }`}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <Heart className={`w-3 h-3 mr-1 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
-                        {locale === 'en' ? 'Wishlist' : 'Favoritos'}
-                      </button>
-                    </div>
+                        {addingToFavorites === product.id ? (
+                          <motion.div
+                            className="w-3 h-3 mr-1 border border-white border-t-transparent rounded-full"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                        ) : (
+                          <Heart className={`w-3 h-3 mr-1 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+                        )}
+                        {addingToFavorites === product.id 
+                          ? (locale === 'en' ? 'Saving...' : 'Guardando...')
+                          : (locale === 'en' ? 'Wishlist' : 'Favoritos')
+                        }
+                      </motion.button>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Featured Badge */}
                 <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 text-xs font-light tracking-wider uppercase">
@@ -148,7 +232,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
