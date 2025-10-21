@@ -45,18 +45,18 @@ export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
-      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
+      <div className="absolute inset-0 bg-stone-900/20 backdrop-blur-sm" onClick={onClose} />
       
       <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl">
         <div className="flex h-full flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-            <h2 className="text-lg font-semibold text-gray-900">
+          <div className="flex items-center justify-between border-b border-stone-200 px-6 py-4">
+            <h2 className="text-lg font-light text-stone-900 tracking-wide">
               {t.nav.cart} ({cartState.items.length})
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-stone-400 hover:text-stone-600 transition-all duration-200 ease-out"
             >
               <X className="h-6 w-6" />
             </button>
@@ -66,11 +66,11 @@ export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
           <div className="flex-1 overflow-y-auto px-6 py-4">
             {cartState.items.length === 0 ? (
               <div className="text-center py-8">
-                <ShoppingCart className="mx-auto h-12 w-12 text-gray-400" />
-                <h3 className="mt-2 text-sm font-medium text-gray-900">
+                <ShoppingCart className="mx-auto h-12 w-12 text-stone-400" />
+                <h3 className="mt-2 text-sm font-light text-stone-900 tracking-wide">
                   {locale === 'en' ? 'Your cart is empty' : 'Tu carrito está vacío'}
                 </h3>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-stone-500 font-light">
                   {locale === 'en' ? 'Add some items to get started' : 'Agrega algunos artículos para comenzar'}
                 </p>
               </div>
@@ -132,7 +132,7 @@ export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
               <div className="space-y-2">
                 <button
                   onClick={handleWhatsAppOrder}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg font-medium flex items-center justify-center"
+                  className="w-full bg-stone-800 hover:bg-stone-900 text-white py-3 px-4 rounded-sm font-light flex items-center justify-center transition-all duration-200 ease-out tracking-wide"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   {locale === 'en' ? 'Order via WhatsApp' : 'Pedir por WhatsApp'}

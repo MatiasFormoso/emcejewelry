@@ -99,11 +99,11 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
             <button
               key={category.key}
               onClick={() => setSelectedCategory(category.key)}
-              className={`px-6 py-3 rounded-xl font-medium tracking-wider uppercase text-sm transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md ${
-                selectedCategory === category.key
-                  ? 'bg-gradient-to-r from-yellow-500 to-amber-500 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
-              }`}
+                     className={`px-6 py-3 rounded-sm font-light tracking-wide uppercase text-sm transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md ${
+                       selectedCategory === category.key
+                         ? 'bg-stone-800 text-white shadow-lg'
+                         : 'bg-stone-100 text-stone-700 hover:bg-stone-200 hover:text-stone-900'
+                     }`}
             >
               {category.label}
             </button>
@@ -115,25 +115,28 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-md transition-all duration-200 ease-out"
             >
               {/* Product Image */}
-              <div className="h-64 bg-gray-100 flex items-center justify-center relative">
+              <div className="h-64 bg-gradient-to-br from-stone-50 to-stone-100 flex items-center justify-center relative">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-3xl">💎</span>
+                  <div className="w-16 h-16 bg-gradient-to-br from-stone-200 to-stone-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                    <div className="w-8 h-8 bg-gradient-to-br from-stone-400 to-stone-500 rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-white rounded-full opacity-60"></div>
+                    </div>
                   </div>
+                  <p className="text-xs text-stone-500 font-light tracking-wide uppercase">Jewelry</p>
                 </div>
                 
                 {/* Favorite Button */}
                 <button
                   onClick={() => handleToggleFavorite(product)}
                   disabled={addingToFavorites === product.id}
-                  className={`absolute top-4 right-4 p-2 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center min-h-[44px] min-w-[44px] ${
-                    isFavorite(product.id)
-                      ? 'bg-red-500 text-white hover:bg-red-600'
-                      : 'bg-white/90 text-gray-700 hover:bg-white'
-                  }`}
+                           className={`absolute top-4 right-4 p-2 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] min-w-[44px] ${
+                             isFavorite(product.id)
+                               ? 'bg-stone-600 text-white hover:bg-stone-700'
+                               : 'bg-white/90 text-stone-600 hover:bg-white'
+                           }`}
                 >
                   {addingToFavorites === product.id ? (
                     <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
@@ -145,21 +148,21 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
 
               {/* Product Info */}
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  {locale === 'en' ? product.nameEn : product.name}
-                </h3>
+                       <h3 className="text-lg font-light text-stone-800 mb-2 tracking-wide">
+                         {locale === 'en' ? product.nameEn : product.name}
+                       </h3>
 
-                <p className="text-gray-600 mb-3 text-sm">
+                <p className="text-stone-600 mb-3 text-sm font-light leading-relaxed">
                   {locale === 'en' ? product.descriptionEn : product.description}
                 </p>
 
                 {/* Price */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xl font-bold text-yellow-600">
+                  <span className="text-xl font-light text-stone-700 tracking-wide">
                     {formatPrice(product.price)}
                   </span>
                   {product.weight && (
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-stone-500 font-light">
                       {product.weight}
                     </span>
                   )}
@@ -170,7 +173,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                   <button
                     onClick={() => handleAddToCart(product)}
                     disabled={addingToCart === product.id}
-                    className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-colors duration-200 flex items-center justify-center min-h-[44px]"
+                           className="flex-1 bg-stone-800 hover:bg-stone-900 text-white py-2 px-4 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] tracking-wide"
                   >
                     {addingToCart === product.id ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -184,7 +187,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                   
                   <Link
                     href={`/${locale}/catalogo`}
-                    className="px-3 py-2 border border-yellow-500 text-yellow-600 rounded-lg font-medium text-sm hover:bg-yellow-500 hover:text-white transition-colors duration-200 flex items-center justify-center min-h-[44px] min-w-[44px]"
+                           className="px-3 py-2 border border-stone-300 text-stone-700 rounded-sm font-light text-sm hover:bg-stone-800 hover:text-white transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] min-w-[44px]"
                   >
                     <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -197,13 +200,15 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
         {/* No Products Message */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-16">
-            <div className="w-24 h-24 bg-gradient-to-br from-yellow-400/10 to-amber-400/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <span className="text-4xl">💎</span>
+            <div className="w-24 h-24 bg-gradient-to-br from-stone-200/20 to-stone-300/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-stone-400 to-stone-500 rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 bg-white rounded-full opacity-60"></div>
+              </div>
             </div>
-            <h3 className="text-xl font-playfair font-light text-gray-800 mb-4">
+            <h3 className="text-xl font-light text-stone-800 mb-4 tracking-wide">
               {locale === 'en' ? 'No products found' : 'No se encontraron productos'}
             </h3>
-            <p className="text-gray-600 font-light">
+            <p className="text-stone-600 font-light">
               {locale === 'en' ? 'Try selecting a different category' : 'Intenta seleccionar una categoría diferente'}
             </p>
           </div>
