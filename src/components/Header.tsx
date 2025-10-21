@@ -37,7 +37,7 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           <Link
             href={`/${locale}`}
-            className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-colors duration-300 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+            className="text-xl font-bold text-stone-900 hover:text-yellow-600 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
             style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
             EMC Jewelry
@@ -49,7 +49,7 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-stone-600 hover:text-stone-900 transition-all duration-300 font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
+                className="text-stone-600 hover:text-stone-900 transition-all duration-200 ease-out font-medium text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none"
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >
                 {item.name}
@@ -57,10 +57,10 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
               </Link>
             ))}
             <LocaleSwitcher />
-            <button
-              onClick={onToggleCart}
-              className="relative p-2 text-stone-600 hover:text-yellow-600 transition-colors duration-300"
-            >
+                   <button
+                     onClick={onToggleCart}
+                     className="relative p-2 text-stone-600 hover:text-yellow-600 transition-all duration-200 ease-out"
+                   >
               <ShoppingCart className="w-5 h-5" />
               {cartState.items.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
@@ -68,10 +68,10 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
                 </span>
               )}
             </button>
-            <Link
-              href={`/${locale}/favoritos`}
-              className="relative p-2 text-stone-600 hover:text-red-600 transition-colors duration-300"
-            >
+                   <Link
+                     href={`/${locale}/favoritos`}
+                     className="relative p-2 text-stone-600 hover:text-red-600 transition-all duration-200 ease-out"
+                   >
               <Heart className="w-5 h-5" />
               {favoritesState.items.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
