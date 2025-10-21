@@ -29,8 +29,32 @@ export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
     const totalText = `Total: ${formatPrice(getTotalPrice())}`;
     const message = `Hola! Me interesa realizar el siguiente pedido:\n\n${itemsText}\n\n${totalText}`;
     
-    const whatsappUrl = `https://wa.me/971547083607?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    // Intentar múltiples formatos de WhatsApp
+    const phoneNumber = '971547083607';
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Formato 1: wa.me (puede fallar con 429)
+    const whatsappUrl1 = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Formato 2: api.whatsapp.com (alternativa)
+    const whatsappUrl2 = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+    
+    // Formato 3: web.whatsapp.com (para web)
+    const whatsappUrl3 = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+    
+    console.log('Intentando WhatsApp URL 1:', whatsappUrl1);
+    
+    // Intentar el primer formato, si falla usar el segundo
+    try {
+      const newWindow = window.open(whatsappUrl1, '_blank');
+      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+        console.log('Fallback a formato 2:', whatsappUrl2);
+        window.open(whatsappUrl2, '_blank');
+      }
+    } catch (error) {
+      console.log('Error con formato 1, usando formato 2:', whatsappUrl2);
+      window.open(whatsappUrl2, '_blank');
+    }
   };
 
   const formatPrice = (price: number) => {
