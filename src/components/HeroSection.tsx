@@ -10,8 +10,8 @@ type HeroSectionProps = { t: Dict; locale: Locale };
 
 export default function HeroSection({ t, locale }: HeroSectionProps) {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 300], [0, -50]);
-  const opacity = useTransform(scrollY, [0, 200], [1, 0.8]);
+  const y = useTransform(scrollY, [0, 500], [0, -20]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.95]);
 
   return (
     <section id="hero" className="relative overflow-hidden">

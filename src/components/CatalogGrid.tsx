@@ -166,7 +166,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                   ) : (
                     <Heart className={`w-4 h-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
                   )}
-                </button>
+                </motion.button>
               </div>
 
               {/* Product Info */}
