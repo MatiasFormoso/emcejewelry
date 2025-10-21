@@ -80,11 +80,14 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
               className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-md transition-all duration-200 ease-out"
             >
               {/* Product Image */}
-              <div className="h-64 bg-gray-100 flex items-center justify-center">
+              <div className="h-64 bg-gradient-to-br from-stone-50 to-stone-100 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-3xl">💎</span>
+                  <div className="w-16 h-16 bg-gradient-to-br from-stone-200 to-stone-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                    <div className="w-8 h-8 bg-gradient-to-br from-stone-400 to-stone-500 rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-white rounded-full opacity-60"></div>
+                    </div>
                   </div>
+                  <p className="text-xs text-stone-500 font-light tracking-wide uppercase">Jewelry</p>
                 </div>
               </div>
 
@@ -100,11 +103,11 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
 
                 {/* Price */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xl font-light text-yellow-600 tracking-wide">
+                  <span className="text-xl font-light text-stone-700 tracking-wide">
                     {formatPrice(product.price)}
                   </span>
                   {product.weight && (
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-stone-500 font-light">
                       {product.weight}g
                     </span>
                   )}
@@ -115,7 +118,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                   <button
                     onClick={() => handleAddToCart(product)}
                     disabled={addingToCart === product.id}
-                           className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] tracking-wide"
+                           className="flex-1 bg-stone-800 hover:bg-stone-900 text-white py-2 px-4 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] tracking-wide"
                   >
                     {addingToCart === product.id ? (
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -132,8 +135,8 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
                     disabled={addingToFavorites === product.id}
                            className={`px-3 py-2 rounded-sm font-light text-sm transition-all duration-200 ease-out flex items-center justify-center min-h-[44px] min-w-[44px] ${
                              isFavorite(product.id)
-                               ? 'bg-red-500 text-white hover:bg-red-600'
-                               : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                               ? 'bg-stone-600 text-white hover:bg-stone-700'
+                               : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
                            }`}
                   >
                     {addingToFavorites === product.id ? (
@@ -152,7 +155,7 @@ export default function FeaturedCollections({ t, locale }: FeaturedCollectionsPr
         <div className="text-center mt-20">
                  <Link
                    href={`/${locale}/colecciones`}
-                   className="group relative px-8 py-3 bg-transparent text-stone-800 rounded-sm font-light tracking-wide uppercase text-sm border border-stone-300 hover:bg-stone-800 hover:text-white transition-all duration-200 ease-out inline-flex items-center"
+                   className="group relative px-8 py-3 bg-stone-800 text-white rounded-sm font-light tracking-wide uppercase text-sm hover:bg-stone-900 transition-all duration-200 ease-out inline-flex items-center"
                  >
             <span className="relative z-10 flex items-center">
               {t.featuredCollections.cta}

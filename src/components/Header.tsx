@@ -37,7 +37,7 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           <Link
             href={`/${locale}`}
-            className="text-xl font-light text-stone-900 hover:text-yellow-600 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
+            className="text-xl font-light text-stone-900 hover:text-stone-700 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
             style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
             EMC Jewelry
@@ -53,28 +53,28 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
                 style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-400 transition-all duration-200 group-hover:w-full"></span>
               </Link>
             ))}
             <LocaleSwitcher />
                    <button
                      onClick={onToggleCart}
-                     className="relative p-2 text-stone-600 hover:text-yellow-600 transition-all duration-200 ease-out"
+                     className="relative p-2 text-stone-600 hover:text-stone-800 transition-all duration-200 ease-out"
                    >
               <ShoppingCart className="w-5 h-5" />
               {cartState.items.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-yellow-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-stone-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   {cartState.items.length}
                 </span>
               )}
             </button>
                    <Link
                      href={`/${locale}/favoritos`}
-                     className="relative p-2 text-stone-600 hover:text-red-600 transition-all duration-200 ease-out"
+                     className="relative p-2 text-stone-600 hover:text-stone-800 transition-all duration-200 ease-out"
                    >
               <Heart className="w-5 h-5" />
               {favoritesState.items.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-stone-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   {favoritesState.items.length}
                 </span>
               )}
