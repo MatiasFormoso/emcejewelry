@@ -20,11 +20,11 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
         className="h-full w-full object-cover object-[center_75%]"
       />
          {/* Elegant gradient overlay with gold accents */}
-         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/70" />
-         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/70 pointer-events-none z-5" />
+         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none z-5" />
       
          {/* Elegant floating jewelry elements */}
-         <div className="absolute inset-0 overflow-hidden pointer-events-none">
+         <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
            <motion.div
              className="absolute top-20 left-10 text-yellow-400/20"
              animate={{ 
@@ -71,7 +71,7 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
            </motion.div>
          </div>
 
-         <div className="absolute inset-0 flex items-center justify-center pt-16">
+         <div className="absolute inset-0 flex items-center justify-center pt-16 z-20">
         <div className="text-center text-white px-6 max-w-6xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
