@@ -11,6 +11,7 @@ export interface Product {
   materialsEn: string[];
   weight?: string;
   featured?: boolean;
+  images?: string[];
 }
 
 // Precios convertidos de AED a USD (1 AED ≈ 0.27 USD)

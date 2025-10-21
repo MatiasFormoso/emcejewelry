@@ -12,6 +12,8 @@ const en: Dict = {
     collections: "Collections",
     about: "About Us",
     contact: "Contact",
+    cart: "Cart",
+    favorites: "Favorites",
   },
 
   hero: {

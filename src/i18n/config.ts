@@ -10,6 +10,8 @@ export type Dict = {
     collections: string;
     about: string;
     contact: string;
+    cart: string;
+    favorites: string;
   };
   hero: {
     badge: string;
