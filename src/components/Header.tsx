@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Heart } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -35,26 +36,59 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
     <nav id="site-nav" className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-stone-200/30 safe-area-top">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link
-            href={`/${locale}`}
-            className="text-xl font-light text-stone-900 hover:text-stone-700 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
-            style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            EMC Jewelry
-          </Link>
+            <Link
+              href={`/${locale}`}
+              className="text-xl font-light text-stone-900 hover:text-stone-700 transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
+              style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+            >
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                EMC Jewelry
+              </motion.span>
+            </Link>
+          </motion.div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
+          <motion.div 
+            className="hidden md:flex items-center space-x-8"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {navigation.map((item, index) => (
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className="text-stone-600 hover:text-stone-900 transition-all duration-200 ease-out font-light text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
-                style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-stone-400 transition-all duration-200 group-hover:w-full"></span>
-              </Link>
+                <Link
+                  href={item.href}
+                  className="text-stone-600 hover:text-stone-900 transition-all duration-200 ease-out font-light text-sm relative group focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none tracking-wide"
+                  style={{ outline: 'none', WebkitTapHighlightColor: 'transparent' }}
+                >
+                  <motion.span 
+                    className="relative z-10"
+                    whileHover={{ y: -1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {item.name}
+                  </motion.span>
+                  <motion.span 
+                    className="absolute bottom-0 left-0 h-0.5 bg-stone-400"
+                    initial={{ width: 0 }}
+                    whileHover={{ width: "100%" }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  />
+                </Link>
+              </motion.div>
             ))}
             <LocaleSwitcher />
                    <button
@@ -79,15 +113,21 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
                 </span>
               )}
             </Link>
-            <a
-              href="https://wa.me/573001234567?text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              Contactar
-            </a>
-          </div>
+              <a
+                href="https://wa.me/971547083607?text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg"
+              >
+                Contactar
+              </a>
+            </motion.div>
+          </motion.div>
 
           {/* Mobile Menu Button */}
           <button
