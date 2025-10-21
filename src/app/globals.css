@@ -705,7 +705,7 @@ html {
   transform: scale(1.03);
 }
 
-/* Mobile performance optimizations */
+/* Mobile touch optimization */
 @media (max-width: 768px) {
   /* Improve scroll performance */
   * {
@@ -713,25 +713,22 @@ html {
     scroll-behavior: auto;
   }
   
-  /* Reduce motion for better performance */
-  .animate-shimmer {
-    animation-duration: 3s;
-  }
-  
-  /* Optimize transforms for mobile */
-  .hover-luxury:hover {
-    transform: translateY(-1px);
-  }
-  
-  /* Ensure minimum touch target size */
+  /* Better touch targets */
   button, 
   [role="button"], 
   input[type="button"], 
   input[type="submit"], 
   input[type="reset"],
   a {
-    min-height: 44px;
-    min-width: 44px;
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent double-tap zoom */
+  * {
+    touch-action: manipulation;
   }
   
   /* Improve button spacing */
@@ -768,6 +765,21 @@ html {
   .animate-ping,
   .animate-pulse {
     animation-duration: 1s;
+  }
+  
+  /* Prevent event conflicts */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better hover states for mobile */
+  .hover\\:scale-105:hover {
+    transform: scale(1.02);
+  }
+  
+  .hover\\:scale-110:hover {
+    transform: scale(1.05);
   }
 }
 

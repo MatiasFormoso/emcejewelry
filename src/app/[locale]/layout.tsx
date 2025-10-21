@@ -31,7 +31,7 @@ export default async function LocaleLayout({
   const t = await getDictionary(locale as Locale);
   
   return (
-        <html lang={locale} className={`${playfair.variable} ${inter.variable} scroll-smooth`}>
+        <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
           <body className="font-sans antialiased min-h-screen bg-stone-50 text-stone-900 overflow-x-hidden">
             <CartProvider>
               <FavoritesProvider>
