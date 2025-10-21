@@ -5,7 +5,6 @@ import FeaturedCollections from "@/components/FeaturedCollections";
 import AboutSection from "@/components/AboutSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CTA from "@/components/CTA";
-import Cart from "@/components/Cart";
 
 import { getDictionary, type Dict, type Locale } from "@/i18n/config";
 import type { Metadata } from "next";
@@ -44,7 +43,6 @@ export default async function HomeByLocale({ params }: Props) {
       <TestimonialsSection t={t} locale={locale} />
       <CTA t={t} locale={locale} />
       <Footer t={t} locale={locale} />
-      <Cart t={t} locale={locale} />
     </main>
   );
 }
