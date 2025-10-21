@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Search, X, ShoppingCart, Heart } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { products, formatPrice } from '@/lib/products';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
-import { useToastContext } from './ToastProvider';
+import { useSimpleToast } from './SimpleToast';
 import type { Dict, Locale } from '@/i18n/config';
 
 interface SearchModalProps {
@@ -23,7 +22,7 @@ export default function SearchModal({ isOpen, onClose, t, locale }: SearchModalP
   const [addingToFavorites, setAddingToFavorites] = useState<string | null>(null);
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
-  const { success } = useToastContext();
+  const { success } = useSimpleToast();
 
   useEffect(() => {
     if (searchTerm.trim() === '') {
@@ -42,11 +41,10 @@ export default function SearchModal({ isOpen, onClose, t, locale }: SearchModalP
   }, [searchTerm]);
 
   const handleAddToCart = async (product: any) => {
+    if (addingToCart === product.id) return;
+    
     setAddingToCart(product.id);
     addItem(product);
-    
-    // Simular delay para feedback visual
-    await new Promise(resolve => setTimeout(resolve, 500));
     
     success(
       locale === 'en' ? 'Added to Cart' : 'Agregado al Carrito',
@@ -54,15 +52,16 @@ export default function SearchModal({ isOpen, onClose, t, locale }: SearchModalP
       <ShoppingCart className="w-5 h-5" />
     );
     
-    setAddingToCart(null);
+    setTimeout(() => setAddingToCart(null), 500);
   };
 
   const handleToggleFavorite = async (product: any) => {
+    if (addingToFavorites === product.id) return;
+    
     setAddingToFavorites(product.id);
     
     if (isFavorite(product.id)) {
       removeFavorite(product.id);
-      await new Promise(resolve => setTimeout(resolve, 300));
       success(
         locale === 'en' ? 'Removed from Favorites' : 'Eliminado de Favoritos',
         `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been removed from favorites' : 'ha sido eliminado de favoritos'}`,
@@ -70,7 +69,6 @@ export default function SearchModal({ isOpen, onClose, t, locale }: SearchModalP
       );
     } else {
       addFavorite(product);
-      await new Promise(resolve => setTimeout(resolve, 300));
       success(
         locale === 'en' ? 'Added to Favorites' : 'Agregado a Favoritos',
         `${locale === 'en' ? product.nameEn : product.name} ${locale === 'en' ? 'has been added to favorites' : 'ha sido agregado a favoritos'}`,
@@ -78,186 +76,112 @@ export default function SearchModal({ isOpen, onClose, t, locale }: SearchModalP
       );
     }
     
-    setAddingToFavorites(null);
+    setTimeout(() => setAddingToFavorites(null), 300);
   };
 
   if (!isOpen) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div 
-        className="fixed inset-0 z-50 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        {/* Backdrop */}
-        <motion.div 
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-          onClick={onClose}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        />
-        
-        {/* Search Modal */}
-        <motion.div 
-          className="absolute top-0 left-0 right-0 bg-white shadow-2xl"
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -100, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-        >
-          <div className="max-w-4xl mx-auto px-4 py-6">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-6">
-              <motion.h2 
-                className="text-2xl font-playfair font-light text-gray-800"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-              >
-                {locale === 'en' ? 'Search Products' : 'Buscar Productos'}
-              </motion.h2>
-              <motion.button
-                onClick={onClose}
-                className="p-2 text-gray-400 hover:text-gray-600 transition-colors duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 rounded-lg hover:bg-gray-100"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-              >
-                <X className="h-6 w-6" />
-              </motion.button>
-            </div>
-
-            {/* Search Input */}
-            <motion.div 
-              className="relative mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
+    <div className="fixed inset-0 z-50 overflow-hidden">
+      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
+      
+      <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4">
+        <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[80vh] overflow-hidden">
+          {/* Header */}
+          <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+            <h2 className="text-lg font-semibold text-gray-900">
+              {locale === 'en' ? 'Search Products' : 'Buscar Productos'}
+            </h2>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600"
             >
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Search Input */}
+          <div className="px-6 py-4 border-b border-gray-200">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
-                placeholder={locale === 'en' ? 'Search for jewelry...' : 'Buscar joyas...'}
+                placeholder={locale === 'en' ? 'Search products...' : 'Buscar productos...'}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl font-medium tracking-wide focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 focus:outline-none shadow-sm hover:shadow-md"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent"
                 autoFocus
               />
-            </motion.div>
-
-            {/* Search Results */}
-            <motion.div 
-              className="max-h-96 overflow-y-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
-            >
-              {searchResults.length === 0 ? (
-                <motion.div 
-                  className="text-center py-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.div
-                    className="w-16 h-16 bg-gradient-to-br from-yellow-400/10 to-amber-400/10 rounded-full flex items-center justify-center mx-auto mb-4"
-                    animate={{ rotate: [0, 5, -5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <span className="text-2xl">💎</span>
-                  </motion.div>
-                  <p className="text-gray-500 font-light">
-                    {locale === 'en' ? 'No products found' : 'No se encontraron productos'}
-                  </p>
-                </motion.div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {searchResults.map((product, index) => (
-                    <motion.div 
-                      key={product.id} 
-                      className="border border-gray-200 p-4 hover:border-yellow-300/50 transition-all duration-300 rounded-xl hover:shadow-md bg-white"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      whileHover={{ y: -2 }}
-                    >
-                      <div className="flex items-center space-x-4">
-                        <motion.div 
-                          className="w-16 h-16 bg-gradient-to-br from-yellow-400/10 to-amber-400/10 rounded-full flex items-center justify-center flex-shrink-0"
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <span className="text-2xl">💎</span>
-                        </motion.div>
-                        
-                        <div className="flex-1 min-w-0">
-                          <h3 className="text-sm font-playfair font-medium text-gray-800 truncate">
-                            {locale === 'en' ? product.nameEn : product.name}
-                          </h3>
-                          <p className="text-xs text-gray-500 truncate">
-                            {locale === 'en' ? product.descriptionEn : product.description}
-                          </p>
-                          <p className="text-sm font-playfair font-medium text-yellow-600">
-                            {formatPrice(product.price)}
-                          </p>
-                        </div>
-
-                        <div className="flex flex-col space-y-2">
-                          <motion.button
-                            onClick={() => handleAddToCart(product)}
-                            disabled={addingToCart === product.id}
-                            className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-xs font-medium tracking-wider uppercase hover:from-yellow-600 hover:to-amber-600 transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 rounded-lg shadow-sm"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {addingToCart === product.id ? (
-                              <motion.div
-                                className="w-3 h-3 border border-white border-t-transparent rounded-full"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              />
-                            ) : (
-                              locale === 'en' ? 'Add' : 'Agregar'
-                            )}
-                          </motion.button>
-                          <motion.button
-                            onClick={() => handleToggleFavorite(product)}
-                            disabled={addingToFavorites === product.id}
-                            className={`px-3 py-1 text-xs font-medium tracking-wider uppercase transition-all duration-300 focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 rounded-lg ${
-                              isFavorite(product.id) 
-                                ? 'bg-red-500 text-white hover:bg-red-600' 
-                                : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
-                            }`}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {addingToFavorites === product.id ? (
-                              <motion.div
-                                className="w-3 h-3 border border-white border-t-transparent rounded-full"
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                              />
-                            ) : (
-                              <Heart className={`w-3 h-3 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
-                            )}
-                          </motion.button>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+
+          {/* Search Results */}
+          <div className="overflow-y-auto max-h-96">
+            {searchResults.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-gray-500">
+                  {locale === 'en' ? 'No products found' : 'No se encontraron productos'}
+                </p>
+              </div>
+            ) : (
+              <div className="p-6 space-y-4">
+                {searchResults.map((product) => (
+                  <div key={product.id} className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                    {/* Product Image */}
+                    <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100 flex items-center justify-center">
+                      <span className="text-2xl">💎</span>
+                    </div>
+                    
+                    {/* Product Info */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-medium text-gray-900">
+                        {locale === 'en' ? product.nameEn : product.name}
+                      </h3>
+                      <p className="text-sm text-gray-500 truncate">
+                        {locale === 'en' ? product.descriptionEn : product.description}
+                      </p>
+                      <p className="text-sm font-medium text-yellow-600">
+                        {formatPrice(product.price)}
+                      </p>
+                    </div>
+                    
+                    {/* Actions */}
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => handleAddToCart(product)}
+                        disabled={addingToCart === product.id}
+                        className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center justify-center min-h-[44px] min-w-[44px]"
+                      >
+                        {addingToCart === product.id ? (
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <ShoppingCart className="w-4 h-4" />
+                        )}
+                      </button>
+                      
+                      <button
+                        onClick={() => handleToggleFavorite(product)}
+                        disabled={addingToFavorites === product.id}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center justify-center min-h-[44px] min-w-[44px] ${
+                          isFavorite(product.id)
+                            ? 'bg-red-500 text-white hover:bg-red-600'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        {addingToFavorites === product.id ? (
+                          <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <Heart className={`w-4 h-4 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
-
