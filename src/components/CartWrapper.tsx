@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Header from './Header';
 import Cart from './Cart';
 import { ToastProvider } from './SimpleToast';
+import ToastContainer from './ToastContainer';
 import WhatsAppFloat from './WhatsAppFloat';
 import type { Dict, Locale } from '@/i18n/config';
 
@@ -27,6 +28,7 @@ export default function CartWrapper({ children, t, locale }: CartWrapperProps) {
         {children}
       </main>
       <Cart t={t} locale={locale} isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <ToastContainer />
       <WhatsAppFloat />
     </ToastProvider>
   );
