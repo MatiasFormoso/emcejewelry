@@ -144,9 +144,14 @@ export default async function ContactPage({ params }: Props) {
               <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white text-center">
                 <h3 className="text-xl font-semibold mb-2">¿Necesitas Ayuda Inmediata?</h3>
                 <p className="mb-4">Chatea con nosotros por WhatsApp</p>
-                <button className="px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-gray-100 transition-colors font-medium">
+                <a
+                  href="https://api.whatsapp.com/send?phone=3541235829&text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-gray-100 transition-colors font-medium"
+                >
                   Abrir WhatsApp
-                </button>
+                </a>
               </div>
             </div>
           </div>
