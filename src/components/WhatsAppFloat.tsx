@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function WhatsAppFloat() {
   const handleWhatsAppClick = () => {
-    const phoneNumber = '971547083607';
+    const phoneNumber = '3541235829';
     const message = 'Hola! Me interesa saber más sobre las joyas de EMC Jewelry';
     const encodedMessage = encodeURIComponent(message);
     

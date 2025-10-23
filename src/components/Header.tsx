@@ -119,7 +119,7 @@ export default function Header({ t, locale, onToggleCart }: HeaderProps) {
               transition={{ duration: 0.4, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <a
-                href="https://api.whatsapp.com/send?phone=971547083607&text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
+                href="https://api.whatsapp.com/send?phone=3541235829&text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg"
