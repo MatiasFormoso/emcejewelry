@@ -28,14 +28,19 @@ export default function CollectionsGrid({ t, locale }: CollectionsGridProps) {
       href: `/${locale}/catalogo?category=ear-cuffs`
     },
     { 
-      name: locale === 'en' ? 'Pearls Collection' : 'Colección de Perlas', 
-      description: locale === 'en' ? 'Natural pearls in elegant designs' : 'Perlas naturales en diseños elegantes',
-      href: `/${locale}/catalogo?category=pearls`
+      name: locale === 'en' ? 'Bracelets Collection' : 'Colección de Pulseras', 
+      description: locale === 'en' ? 'Elegant bracelets for every occasion' : 'Pulseras elegantes para toda ocasión',
+      href: `/${locale}/catalogo?category=bracelets`
     },
     { 
-      name: locale === 'en' ? 'Colombian Emeralds' : 'Esmeraldas Colombianas', 
-      description: locale === 'en' ? 'Authentic Colombian emeralds' : 'Esmeraldas colombianas auténticas',
-      href: `/${locale}/catalogo?category=colombian-emeralds`
+      name: locale === 'en' ? 'Chokers Collection' : 'Colección de Chokers', 
+      description: locale === 'en' ? 'Stylish chokers for a modern look' : 'Chokers elegantes para un look moderno',
+      href: `/${locale}/catalogo?category=chokers`
+    },
+    { 
+      name: locale === 'en' ? 'Anklets Collection' : 'Colección de Tobilleras', 
+      description: locale === 'en' ? 'Delicate anklets for summer style' : 'Tobilleras delicadas para el estilo veraniego',
+      href: `/${locale}/catalogo?category=anklets`
     },
     { 
       name: locale === 'en' ? 'Complete Sets' : 'Sets Completos', 

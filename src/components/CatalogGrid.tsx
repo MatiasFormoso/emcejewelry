@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Heart, ShoppingCart, ArrowRight } from 'lucide-react';
+import { Heart, ShoppingCart, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { products, formatPrice } from '@/lib/products';
 import { useCart } from '@/contexts/CartContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
@@ -19,6 +19,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [addingToCart, setAddingToCart] = useState<string | null>(null);
   const [addingToFavorites, setAddingToFavorites] = useState<string | null>(null);
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const { success } = useSimpleToast();
@@ -28,7 +29,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       const category = urlParams.get('category');
-      if (category && ['rings', 'earrings', 'ear-cuffs', 'bracelets', 'chokers', 'sets', 'pearls', 'colombian-emeralds', 'natural-stones', 'anklets'].includes(category)) {
+      if (category && ['rings', 'earrings', 'ear-cuffs', 'bracelets', 'chokers', 'sets', 'anklets'].includes(category)) {
         setSelectedCategory(category);
       }
     }
@@ -42,15 +43,25 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
     { key: 'bracelets', label: t.catalog.filters.bracelets },
     { key: 'chokers', label: t.catalog.filters.chokers },
     { key: 'sets', label: t.catalog.filters.sets },
-    { key: 'pearls', label: t.catalog.filters.pearls },
-    { key: 'colombian-emeralds', label: t.catalog.filters['colombian-emeralds'] },
-    { key: 'natural-stones', label: t.catalog.filters['natural-stones'] },
     { key: 'anklets', label: t.catalog.filters.anklets },
   ];
 
   const filteredProducts = selectedCategory === 'all'
     ? products
     : products.filter(product => product.category === selectedCategory);
+
+  const categoriesPerPage = 4;
+  const maxCategoryIndex = Math.max(0, categories.length - categoriesPerPage);
+
+  const nextCategoryPage = () => {
+    setCurrentCategoryIndex(prev => Math.min(prev + categoriesPerPage, maxCategoryIndex));
+  };
+
+  const prevCategoryPage = () => {
+    setCurrentCategoryIndex(prev => Math.max(prev - categoriesPerPage, 0));
+  };
+
+  const visibleCategories = categories.slice(currentCategoryIndex, currentCategoryIndex + categoriesPerPage);
 
   const handleAddToCart = async (product: any) => {
     if (addingToCart === product.id) return;
@@ -95,20 +106,106 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
     <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.key}
-              onClick={() => setSelectedCategory(category.key)}
-                     className={`px-6 py-3 rounded-sm font-light tracking-wide uppercase text-sm transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md ${
-                       selectedCategory === category.key
-                         ? 'bg-stone-800 text-white shadow-lg'
-                         : 'bg-stone-100 text-stone-700 hover:bg-stone-200 hover:text-stone-900'
-                     }`}
-            >
-              {category.label}
-            </button>
-          ))}
+        <div className="mb-12">
+          {/* Desktop Filters */}
+          <div className="hidden md:flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category.key}
+                onClick={() => setSelectedCategory(category.key)}
+                className={`px-6 py-3 rounded-sm font-light tracking-wide uppercase text-sm transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md ${
+                  selectedCategory === category.key
+                    ? 'bg-stone-800 text-white shadow-lg'
+                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200 hover:text-stone-900'
+                }`}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile Filters */}
+          <div className="md:hidden">
+            <div className="relative">
+              {/* Categories with Navigation */}
+              <div className="flex items-center justify-center gap-3">
+                {/* Left Arrow */}
+                <button
+                  onClick={prevCategoryPage}
+                  disabled={currentCategoryIndex === 0}
+                  className={`p-2 rounded-full transition-all duration-300 flex-shrink-0 ${
+                    currentCategoryIndex === 0 
+                      ? 'opacity-30 cursor-not-allowed' 
+                      : 'hover:bg-stone-100 active:bg-stone-200'
+                  }`}
+                  aria-label="Categorías anteriores"
+                >
+                  <ChevronLeft className={`w-5 h-5 ${
+                    currentCategoryIndex === 0 ? 'text-gray-400' : 'text-stone-600'
+                  }`} />
+                </button>
+
+                {/* Categories */}
+                <div className="flex gap-1.5 justify-center flex-1 overflow-hidden">
+                  {visibleCategories.map((category) => (
+                    <button
+                      key={category.key}
+                      onClick={() => setSelectedCategory(category.key)}
+                      className={`px-3 py-2 rounded-full font-light tracking-wide uppercase text-xs transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md whitespace-nowrap ${
+                        selectedCategory === category.key
+                          ? 'bg-stone-800 text-white shadow-lg'
+                          : 'bg-stone-100 text-stone-700 hover:bg-stone-200 hover:text-stone-900'
+                      }`}
+                    >
+                      {category.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Right Arrow */}
+                <button
+                  onClick={nextCategoryPage}
+                  disabled={currentCategoryIndex === maxCategoryIndex}
+                  className={`p-2 rounded-full transition-all duration-300 flex-shrink-0 ${
+                    currentCategoryIndex === maxCategoryIndex 
+                      ? 'opacity-30 cursor-not-allowed' 
+                      : 'hover:bg-stone-100 active:bg-stone-200'
+                  }`}
+                  aria-label="Más categorías"
+                >
+                  <ChevronRight className={`w-5 h-5 ${
+                    currentCategoryIndex === maxCategoryIndex ? 'text-gray-400' : 'text-stone-600'
+                  }`} />
+                </button>
+              </div>
+
+              {/* Category Indicators */}
+              {categories.length > categoriesPerPage && (
+                <div className="flex justify-center mt-3">
+                  <div className="flex gap-1">
+                    {categories.map((category, index) => {
+                      const isVisible = index >= currentCategoryIndex && index < currentCategoryIndex + categoriesPerPage;
+                      const isSelected = selectedCategory === category.key;
+                      
+                      return (
+                        <div
+                          key={category.key}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            isSelected && isVisible
+                              ? 'bg-stone-800'
+                              : isVisible
+                              ? 'bg-stone-600'
+                              : 'bg-stone-300'
+                          }`}
+                          title={category.label}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Product Grid */}
