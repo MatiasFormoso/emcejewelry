@@ -50,7 +50,7 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
     ? products
     : products.filter(product => product.category === selectedCategory);
 
-  const categoriesPerPage = 4;
+  const categoriesPerPage = 3;
   const maxCategoryIndex = Math.max(0, categories.length - categoriesPerPage);
 
   const nextCategoryPage = () => {
