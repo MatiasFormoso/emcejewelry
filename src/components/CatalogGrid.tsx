@@ -20,12 +20,14 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   const [addingToCart, setAddingToCart] = useState<string | null>(null);
   const [addingToFavorites, setAddingToFavorites] = useState<string | null>(null);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
   const { addItem } = useCart();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
   const { success } = useSimpleToast();
 
   // Manejar parámetros de URL
   useEffect(() => {
+    setIsMounted(true);
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       const category = urlParams.get('category');
@@ -213,16 +215,16 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
           {filteredProducts.map((product, index) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={isMounted ? { opacity: 0, y: 20 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
+                duration: 0.3, 
+                delay: isMounted ? index * 0.05 : 0,
                 ease: [0.25, 0.46, 0.45, 0.94]
               }}
               whileHover={{ 
                 y: -4,
-                transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }
+                transition: { duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }
               }}
               className="bg-white border border-stone-200 rounded-sm shadow-sm hover:shadow-lg transition-all duration-300 ease-out group"
             >
