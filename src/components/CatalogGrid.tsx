@@ -146,15 +146,15 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
                 </button>
 
                 {/* Categories */}
-                <div className="flex gap-1.5 justify-center flex-1 overflow-hidden">
+                <div className="flex gap-2 justify-center flex-1 overflow-hidden">
                   {visibleCategories.map((category) => (
                     <button
                       key={category.key}
                       onClick={() => setSelectedCategory(category.key)}
-                      className={`px-3 py-2 rounded-full font-light tracking-wide uppercase text-xs transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md whitespace-nowrap ${
+                      className={`px-4 py-2.5 rounded-full font-light tracking-wide text-xs transition-all duration-200 ease-out focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-sm hover:shadow-md whitespace-nowrap flex-shrink-0 ${
                         selectedCategory === category.key
-                          ? 'bg-stone-800 text-white shadow-lg'
-                          : 'bg-stone-100 text-stone-700 hover:bg-stone-200 hover:text-stone-900'
+                          ? 'bg-stone-800 text-white shadow-lg font-medium'
+                          : 'bg-stone-50 text-stone-700 hover:bg-stone-100 hover:text-stone-900 border border-stone-200'
                       }`}
                     >
                       {category.label}
