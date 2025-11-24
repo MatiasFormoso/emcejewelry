@@ -16,19 +16,32 @@ export default function WhatsAppFloat() {
       
       // Obtener la altura del viewport
       const viewportHeight = window.innerHeight;
-      // Obtener la posición del scroll
-      const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      // Obtener la posición del scroll - usar múltiples métodos para compatibilidad
+      const scrollY = window.scrollY 
+        || window.pageYOffset 
+        || document.documentElement.scrollTop 
+        || document.body.scrollTop 
+        || 0;
       
-      // Mostrar el botón cuando se ha scrolleado más del 80% del viewport
-      // Esto asegura que aparezca después del hero pero no demasiado tarde
-      const threshold = viewportHeight * 0.8;
+      // En mobile, el hero suele ser 100vh, así que mostramos el botón después de scrollear 50vh
+      // Esto es más confiable que un porcentaje fijo
+      const isMobile = window.innerWidth < 768;
+      const threshold = isMobile ? viewportHeight * 0.5 : viewportHeight * 0.8;
+      
       setIsVisible(scrollY > threshold);
     };
 
     // Verificar posición inicial después de un pequeño delay para asegurar que el DOM esté listo
-    setTimeout(() => {
+    const initialCheck = setTimeout(() => {
       handleScroll();
-    }, 100);
+    }, 200);
+
+    // También verificar cuando la página carga completamente
+    if (document.readyState === 'complete') {
+      handleScroll();
+    } else {
+      window.addEventListener('load', handleScroll, { once: true });
+    }
 
     // Agregar listener de scroll
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -36,8 +49,10 @@ export default function WhatsAppFloat() {
     
     // Cleanup
     return () => {
+      clearTimeout(initialCheck);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('load', handleScroll);
     };
   }, []);
 
@@ -78,7 +93,8 @@ export default function WhatsAppFloat() {
             position: 'fixed',
             bottom: '1rem',
             right: '1rem',
-            zIndex: 9999
+            zIndex: 9999,
+            pointerEvents: 'auto'
           }}
         >
           <motion.button
