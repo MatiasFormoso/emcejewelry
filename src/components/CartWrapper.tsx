@@ -23,7 +23,7 @@ export default function CartWrapper({ children, t, locale }: CartWrapperProps) {
 
   return (
     <ToastProvider>
-      <Header t={t} locale={locale} onToggleCart={toggleCart} />
+      <Header t={t} locale={locale} />
       <main className="min-h-screen">
         {children}
       </main>
