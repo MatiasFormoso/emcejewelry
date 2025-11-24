@@ -14,12 +14,12 @@ export default function StorySection({ t, locale }: StorySectionProps) {
     <section ref={ref} className="py-20 md:py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
-          {/* Text Content - Left side on desktop */}
+          {/* Text Content - Left side on desktop, first on mobile */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="order-2 lg:order-1"
+            className="order-1 lg:order-1"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-light text-gray-900 mb-6 md:mb-8 tracking-tight">
               {t.story.title}
@@ -41,12 +41,12 @@ export default function StorySection({ t, locale }: StorySectionProps) {
             </div>
           </motion.div>
 
-          {/* Image - Right side on desktop */}
+          {/* Image - Right side on desktop, second on mobile */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="relative overflow-hidden bg-gray-100 aspect-[4/5] order-1 lg:order-2"
+            className="relative overflow-hidden bg-gray-100 aspect-[4/5] order-2 lg:order-2"
           >
             <Image
               src="/fotohistoria.jpeg"
