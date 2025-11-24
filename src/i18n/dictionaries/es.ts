@@ -27,7 +27,7 @@ const es: Dict = {
     subtitle: "Dejé los tribunales para encontrar mi propia voz en el metal y la piedra.",
     paragraph1: "Mi historia comienza lejos del taller, en el mundo de las leyes. Como abogada, sentía la presión constante de la formalidad rígida: los tacones altos, el maquillaje excesivo... sentía que esa 'producción' ocultaba quien realmente era.",
     paragraph2: "Descubrí que la verdadera elegancia no está en disfrazarse, sino en desenfocar la atención. Entendí que con la pieza correcta —única, con carácter— una mujer puede sentirse poderosa, cómoda e iluminada, sin necesidad de nada más.",
-    paragraph3: "Hoy, cada pieza de EMC Jewelry une dos mundos: la riqueza de las técnicas ancestrales de Colombia (como la filigrana y el martillado) con el lujo moderno y soleado de los Emiratos Árabes. No diseño por temporadas, diseño según lo que dicta el alma en el momento. Una pieza, una historia.",
+    paragraph3: "Hoy, cada pieza de EMC Jewelry une dos mundos: la riqueza de las técnicas artesanales de Colombia con el lujo moderno y soleado de Dubai, UAE. No diseño por temporadas, diseño según lo que dicta el alma en el momento. Una pieza, una historia.",
     cta: "Conoce la Colección",
   },
   atelier: {

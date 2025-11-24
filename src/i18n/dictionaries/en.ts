@@ -27,7 +27,7 @@ const en: Dict = {
     subtitle: "I left the courtroom to find my own voice in metal and stone.",
     paragraph1: "My story begins far from the workshop, in the world of law. As a lawyer, I felt the constant pressure of rigid formality: high heels, excessive makeup... I felt that this 'production' was hiding who I really was.",
     paragraph2: "I discovered that true elegance is not about disguising oneself, but about defocusing attention. I understood that with the right piece —unique, with character— a woman can feel powerful, comfortable, and illuminated, without needing anything else.",
-    paragraph3: "Today, every piece of EMC Jewelry unites two worlds: the richness of ancestral techniques from Colombia (like filigree and hammering) with the modern, sunny luxury of the United Arab Emirates. I don't design by seasons, I design according to what the soul dictates in the moment. One piece, one story.",
+    paragraph3: "Today, every piece of EMC Jewelry unites two worlds: the richness of artisanal techniques from Colombia with the modern, sunny luxury of Dubai, UAE. I don't design by seasons, I design according to what the soul dictates in the moment. One piece, one story.",
     cta: "Discover the Collection",
   },
   atelier: {
