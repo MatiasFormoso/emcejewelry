@@ -23,10 +23,10 @@ export default function WhatsAppFloat() {
         || document.body.scrollTop 
         || 0;
       
-      // En mobile, el hero suele ser 100vh, así que mostramos el botón después de scrollear 50vh
-      // Esto es más confiable que un porcentaje fijo
+      // En mobile, mostrar el botón después de scrollear 200px (más temprano)
+      // En desktop, después del 80% del viewport
       const isMobile = window.innerWidth < 768;
-      const threshold = isMobile ? viewportHeight * 0.5 : viewportHeight * 0.8;
+      const threshold = isMobile ? 200 : viewportHeight * 0.8;
       
       setIsVisible(scrollY > threshold);
     };
