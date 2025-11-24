@@ -42,7 +42,7 @@ export default function ContactContent({ t, locale }: ContactContentProps) {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-white">
+      <section className="relative pt-28 pb-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
