@@ -1,9 +1,36 @@
 'use client';
 
 import { MessageCircle } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function WhatsAppFloat() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Obtener la altura del viewport
+      const viewportHeight = window.innerHeight;
+      // Obtener la posición del scroll
+      const scrollY = window.scrollY || window.pageYOffset;
+      
+      // Mostrar el botón solo si se ha scrolleado más allá del hero (100vh)
+      // Agregamos un pequeño margen de 50px para que aparezca suavemente
+      setIsVisible(scrollY > viewportHeight - 50);
+    };
+
+    // Verificar posición inicial
+    handleScroll();
+
+    // Agregar listener de scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleWhatsAppClick = () => {
     const phoneNumber = '971547083607';
     const message = 'Hola! Me interesa saber más sobre las joyas de EMC Jewelry';
@@ -24,22 +51,27 @@ export default function WhatsAppFloat() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, delay: 1 }}
-      className="fixed bottom-6 right-6 z-50 hidden md:block"
-    >
-      <motion.button
-        onClick={handleWhatsAppClick}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ duration: 0.2 }}
-        className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
-        aria-label="Contactar por WhatsApp"
-      >
-        <MessageCircle className="w-6 h-6" />
-      </motion.button>
-    </motion.div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0, y: 20 }}
+          transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50"
+        >
+          <motion.button
+            onClick={handleWhatsAppClick}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="bg-green-500 hover:bg-green-600 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+            aria-label="Contactar por WhatsApp"
+          >
+            <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
+          </motion.button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
