@@ -29,13 +29,13 @@ export default async function CollectionsPage({ params }: Props) {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/5 to-yellow-400/5 py-20">
+      <section className="bg-white py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-playfair font-bold gradient-text-gold mb-6">
-            {t.collections.title}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-light text-gray-900 mb-8 tracking-tight">
+            {locale === 'en' ? 'Collections' : 'Colecciones'}
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {t.collections.subtitle}
+          <p className="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto">
+            {t.meta.description}
           </p>
         </div>
       </section>
