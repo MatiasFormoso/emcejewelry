@@ -1,10 +1,9 @@
 // src/app/[locale]/page.tsx
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import FeaturedCollections from "@/components/FeaturedCollections";
-import AboutSection from "@/components/AboutSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import CTA from "@/components/CTA";
+import PhilosophySection from "@/components/PhilosophySection";
+import StorySection from "@/components/StorySection";
+import ArtGallery from "@/components/ArtGallery";
 
 import { getDictionary, type Dict, type Locale } from "@/i18n/config";
 import type { Metadata } from "next";
@@ -36,12 +35,19 @@ export default async function HomeByLocale({ params }: Props) {
   const t: Dict = await getDictionary(locale);
 
   return (
-    <main className="min-h-screen bg-stone-50 text-stone-900 overflow-x-hidden">
+    <main className="min-h-screen bg-gray-50 text-gray-900 overflow-x-hidden">
+      {/* SECCIÓN A: HERO (Impacto) */}
       <HeroSection t={t} locale={locale} />
-      <FeaturedCollections t={t} locale={locale} />
-      <AboutSection t={t} locale={locale} />
-      <TestimonialsSection t={t} locale={locale} />
-      <CTA t={t} locale={locale} />
+      
+      {/* SECCIÓN B: FILOSOFÍA (El "Por Qué") */}
+      <PhilosophySection t={t} locale={locale} />
+      
+      {/* SECCIÓN C: LA HISTORIA (El "Quién") */}
+      <StorySection t={t} locale={locale} />
+      
+      {/* SECCIÓN D: EL ATELIER (Galería de Arte) */}
+      <ArtGallery t={t} locale={locale} />
+      
       <Footer t={t} locale={locale} />
     </main>
   );

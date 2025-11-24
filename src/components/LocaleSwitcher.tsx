@@ -40,9 +40,9 @@ export default function LocaleSwitcher({
 
   // Estilo elegante para joyería - Luxury Style
   const baseBtn =
-    "inline-flex items-center justify-center rounded-none border " +
-    "border-gray-300 text-gray-700 font-light tracking-wider uppercase " +
-    "transition-all duration-300 hover:bg-gray-800 hover:text-white hover:border-gray-800 " +
+    "inline-flex items-center justify-center rounded-full border " +
+    "border-gray-200 text-gray-700 font-light tracking-wider uppercase " +
+    "transition-all duration-300 hover:bg-gray-900 hover:text-white hover:border-gray-900 " +
     "focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 select-none";
 
   const onSwitch = () => {

@@ -1,9 +1,7 @@
 // src/app/[locale]/layout.tsx
 import "../globals.css";
 import { Playfair_Display, Inter } from "next/font/google";
-import { CartProvider } from "@/contexts/CartContext";
-import { FavoritesProvider } from "@/contexts/FavoritesContext";
-import CartWrapper from "@/components/CartWrapper";
+import AppWrapper from "@/components/AppWrapper";
 import { getDictionary } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 
@@ -32,13 +30,9 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${playfair.variable} ${inter.variable}`}>
       <body className="font-sans antialiased bg-stone-50 text-stone-900 overflow-x-hidden">
-        <CartProvider>
-          <FavoritesProvider>
-            <CartWrapper t={t} locale={locale as Locale}>
-              {children}
-            </CartWrapper>
-          </FavoritesProvider>
-        </CartProvider>
+        <AppWrapper t={t} locale={locale as Locale}>
+          {children}
+        </AppWrapper>
       </body>
     </html>
   );

@@ -8,25 +8,36 @@ const es: Dict = {
 
   nav: {
     home: "Inicio",
-    catalog: "Catálogo",
-    collections: "Colecciones",
     about: "Nosotros",
     contact: "Contacto",
-    cart: "Carrito",
-    favorites: "Favoritos",
   },
 
   hero: {
-    badge: "Colección Exclusiva",
-    title: "EMC Jewelry",
-    subtitle: "Descubre la elegancia atemporal en cada pieza única",
-    ctaPrimary: "Explorar Catálogo",
-    ctaSecondary: "Ver Colección",
-    features: {
-      quality: "Calidad Premium",
-      craftsmanship: "Artesanía Fina",
-      elegance: "Elegancia Única",
-    },
+    title: "Donde la esencia encuentra su luz",
+    subtitle: "Piezas únicas creadas a mano en Colombia",
+    cta: "Conocer más",
+  },
+  philosophy: {
+    title: "La elegancia en su forma más pura",
+    subtitle: "Filosofía",
+    description: "La verdadera elegancia no requiere formalidad rígida. Una pieza única puede ser suficiente para transformar cualquier momento, sin necesidad de complementos excesivos.",
+  },
+  story: {
+    title: "El Poder de Iluminar sin Sobreproducirse",
+    subtitle: "Dejé los tribunales para encontrar mi propia voz en el metal y la piedra.",
+    paragraph1: "Mi historia comienza lejos del taller, en el mundo de las leyes. Como abogada, sentía la presión constante de la formalidad rígida: los tacones altos, el maquillaje excesivo... sentía que esa 'producción' ocultaba quien realmente era.",
+    paragraph2: "Descubrí que la verdadera elegancia no está en disfrazarse, sino en desenfocar la atención. Entendí que con la pieza correcta —única, con carácter— una mujer puede sentirse poderosa, cómoda e iluminada, sin necesidad de nada más.",
+    paragraph3: "Hoy, cada pieza de EMC Jewelry une dos mundos: la riqueza de las técnicas ancestrales de Colombia (como la filigrana y el martillado) con el lujo moderno y soleado de los Emiratos Árabes. No diseño por temporadas, diseño según lo que dicta el alma en el momento. Una pieza, una historia.",
+    cta: "Conoce la Colección",
+  },
+  atelier: {
+    title: "El Atelier",
+    subtitle: "Galería de Arte",
+    cta: "Conocer más sobre esta pieza",
+  },
+  instagram: {
+    title: "Inspiración Diaria",
+    subtitle: "@emcejewelry",
   },
 
   featuredCollections: {
@@ -54,7 +65,7 @@ const es: Dict = {
   },
 
   footer: {
-    description: "EMC Jewelry - Creando joyería elegante y sofisticada para momentos especiales.",
+    description: "By: Maria Caicedo | Colombian Handcrafted for the UAE | Limited Statement Jewelry | One Piece Edition",
     quickLinks: "Enlaces Rápidos",
     contact: "Contacto",
     followUs: "Síguenos",
@@ -72,40 +83,13 @@ const es: Dict = {
       submit: "Enviar Mensaje",
     },
     info: {
-      address: "Dirección: Por definir",
-      phone: "Teléfono: +354 123 5829",
+      address: "Abu Dhabi - UAE",
+      phone: "Teléfono: +971 54 708 3607",
       email: "Email: info@emcjewelry.com",
       hours: "Horarios: Lun-Vie 9:00-18:00",
     },
   },
 
-  catalog: {
-    title: "Catálogo de Joyería",
-    subtitle: "Descubre nuestra amplia selección de piezas únicas",
-    filters: {
-      all: "Todas",
-      rings: "Anillos",
-      earrings: "Aretes",
-      "ear-cuffs": "Ear Cuffs",
-      bracelets: "Pulseras",
-      chokers: "Chokers",
-      sets: "Sets",
-      pearls: "Perlas",
-      "colombian-emeralds": "Esmeraldas Colombianas",
-      "natural-stones": "Piedras Naturales",
-      anklets: "Tobilleras",
-    },
-  },
-
-  favorites: {
-    title: "Mis Favoritos",
-    subtitle: "Las joyas que más te gustan",
-  },
-
-  collections: {
-    title: "Nuestras Colecciones",
-    subtitle: "Cada colección cuenta una historia única",
-  },
 
   aboutUs: {
     title: "Sobre Nosotros",

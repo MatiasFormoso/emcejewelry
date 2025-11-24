@@ -29,7 +29,7 @@ export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
     const totalText = `Total: ${formatPrice(getTotalPrice())}`;
     const message = `Hola! Me interesa realizar el siguiente pedido:\n\n${itemsText}\n\n${totalText}`;
     
-    const phoneNumber = '3541235829';
+    const phoneNumber = '971547083607';
     const encodedMessage = encodeURIComponent(message);
     
     // Usar api.whatsapp.com directamente

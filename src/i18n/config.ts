@@ -6,24 +6,35 @@ export type Dict = {
   };
   nav: {
     home: string;
-    catalog: string;
-    collections: string;
     about: string;
     contact: string;
-    cart: string;
-    favorites: string;
   };
   hero: {
-    badge: string;
     title: string;
     subtitle: string;
-    ctaPrimary: string;
-    ctaSecondary: string;
-    features: {
-      quality: string;
-      craftsmanship: string;
-      elegance: string;
-    };
+    cta: string;
+  };
+  philosophy: {
+    title: string;
+    subtitle: string;
+    description: string;
+  };
+  story: {
+    title: string;
+    subtitle: string;
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    cta: string;
+  };
+  atelier: {
+    title: string;
+    subtitle: string;
+    cta: string;
+  };
+  instagram: {
+    title: string;
+    subtitle: string;
   };
   featuredCollections: {
     title: string;
@@ -68,31 +79,6 @@ export type Dict = {
       email: string;
       hours: string;
     };
-  };
-  catalog: {
-    title: string;
-    subtitle: string;
-    filters: {
-      all: string;
-      rings: string;
-      earrings: string;
-      'ear-cuffs': string;
-      bracelets: string;
-      chokers: string;
-      sets: string;
-      pearls: string;
-      'colombian-emeralds': string;
-      'natural-stones': string;
-      anklets: string;
-    };
-  };
-  favorites: {
-    title: string;
-    subtitle: string;
-  };
-  collections: {
-    title: string;
-    subtitle: string;
   };
   aboutUs: {
     title: string;
