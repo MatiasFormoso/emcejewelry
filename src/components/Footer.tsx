@@ -109,8 +109,19 @@ export default function Footer({ t, locale }: FooterProps) {
 
         {/* Bottom */}
         <div className="border-t border-gray-700/50 mt-16 pt-8 text-center">
-          <p className="text-gray-300 text-sm font-light">
+          <p className="text-gray-300 text-sm font-light mb-2">
             {t.footer.rights}
+          </p>
+          <p className="text-gray-400 text-xs font-light">
+            {locale === 'en' ? 'Web support by ' : 'Soporte web por '}
+            <a 
+              href="https://modularsoluciones.com/en" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-300 hover:text-white transition-colors duration-200 underline"
+            >
+              Modular Soluciones
+            </a>
           </p>
         </div>
       </div>
