@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getDictionary(locale);
   
   return {
-    title: `${t.favorites.title} - ${t.meta.title}`,
-    description: t.favorites.subtitle,
+    title: `${locale === 'en' ? 'Favorites' : 'Favoritos'} - ${t.meta.title}`,
+    description: t.meta.description,
     alternates: {
       canonical: `/${locale}/favoritos`,
       languages: { es: "/es/favoritos", en: "/en/favoritos" }

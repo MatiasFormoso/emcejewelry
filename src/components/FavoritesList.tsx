@@ -61,10 +61,10 @@ export default function FavoritesList({ t, locale }: FavoritesListProps) {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-playfair font-light text-gray-800 mb-6 tracking-tight">
-            <span className="font-normal">{t.favorites.title}</span>
+            <span className="font-normal">{locale === 'en' ? 'Favorites' : 'Favoritos'}</span>
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
-            {t.favorites.subtitle}
+            {locale === 'en' ? 'Your favorite pieces' : 'Tus piezas favoritas'}
           </p>
         </div>
 

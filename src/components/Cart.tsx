@@ -58,7 +58,7 @@ export default function Cart({ t, locale, isOpen, onClose }: CartProps) {
           {/* Header */}
           <div className="flex items-center justify-between border-b border-stone-200 px-6 py-4">
             <h2 className="text-lg font-light text-stone-900 tracking-wide">
-              {t.nav.cart} ({cartState.items.length})
+              {locale === 'en' ? 'Cart' : 'Carrito'} ({cartState.items.length})
             </h2>
             <button
               onClick={onClose}

@@ -18,19 +18,19 @@ export default function PhilosophySection({ t, locale }: PhilosophySectionProps)
   ];
 
   return (
-    <section ref={ref} className="py-32 bg-white">
+    <section ref={ref} className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-light text-gray-900 mb-8 tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-light text-gray-900 mb-6 md:mb-8 tracking-tight">
             {t.philosophy.title}
           </h2>
-          <p className="text-sm md:text-base text-gray-500 font-light max-w-2xl mx-auto tracking-widest uppercase">
+          <p className="text-xs md:text-sm lg:text-base text-gray-500 font-light max-w-2xl mx-auto tracking-widest uppercase">
             {t.philosophy.subtitle}
           </p>
         </motion.div>
@@ -40,9 +40,9 @@ export default function PhilosophySection({ t, locale }: PhilosophySectionProps)
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="text-center mb-24"
+          className="text-center mb-12 md:mb-24"
         >
-          <p className="text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-800 font-light leading-relaxed max-w-6xl mx-auto">
+          <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800 font-light leading-relaxed max-w-6xl mx-auto px-4">
             {t.philosophy.description}
           </p>
         </motion.div>
@@ -52,7 +52,7 @@ export default function PhilosophySection({ t, locale }: PhilosophySectionProps)
           initial={{ opacity: 0 }}
           animate={isVisible ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-4"
         >
           {lifestyleImages.map((image, index) => (
             <motion.div

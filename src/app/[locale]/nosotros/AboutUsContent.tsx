@@ -14,7 +14,7 @@ export default function AboutUsContent({ t, locale }: AboutUsContentProps) {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-32 bg-white">
+      <section className="relative py-20 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -22,10 +22,10 @@ export default function AboutUsContent({ t, locale }: AboutUsContentProps) {
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-light text-gray-900 mb-8 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-playfair font-light text-gray-900 mb-6 md:mb-8 tracking-tight">
               {t.aboutUs.title}
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-600 font-light leading-relaxed">
               {t.aboutUs.subtitle}
             </p>
           </motion.div>
@@ -33,9 +33,9 @@ export default function AboutUsContent({ t, locale }: AboutUsContentProps) {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-32 bg-gray-50">
+      <section className="py-20 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 mb-16 md:mb-24">
             {/* Mission */}
             <AboutUsCard
               icon={Target}
@@ -58,14 +58,14 @@ export default function AboutUsContent({ t, locale }: AboutUsContentProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="bg-white rounded-2xl p-12 lg:p-16"
+            className="bg-white rounded-2xl p-8 md:p-12 lg:p-16"
           >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-light text-gray-900 mb-4 tracking-tight">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-playfair font-light text-gray-900 mb-4 tracking-tight">
                 {t.aboutUs.values.title}
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {t.aboutUs.values.items.map((value, index) => (
                 <motion.div
                   key={index}
@@ -112,15 +112,15 @@ function AboutUsCard({
       initial={{ opacity: 0, y: 50 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="bg-white rounded-2xl p-10 lg:p-12 shadow-sm hover:shadow-md transition-shadow duration-300"
+      className="bg-white rounded-2xl p-8 md:p-10 lg:p-12 shadow-sm hover:shadow-md transition-shadow duration-300"
     >
-      <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mb-8">
-        <Icon className="w-8 h-8 text-white" />
+      <div className="w-14 h-14 md:w-16 md:h-16 bg-gray-900 rounded-full flex items-center justify-center mb-6 md:mb-8">
+        <Icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
       </div>
-      <h2 className="text-3xl md:text-4xl font-playfair font-light text-gray-900 mb-6 tracking-tight">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-playfair font-light text-gray-900 mb-5 md:mb-6 tracking-tight">
         {title}
       </h2>
-      <p className="text-lg md:text-xl text-gray-700 font-light leading-relaxed">
+      <p className="text-base md:text-lg lg:text-xl text-gray-700 font-light leading-relaxed">
         {description}
       </p>
     </motion.div>
