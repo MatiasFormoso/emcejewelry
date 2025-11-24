@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getDictionary(locale);
   
   return {
-    title: `${t.collections.title} - ${t.meta.title}`,
-    description: t.collections.subtitle,
+    title: `${locale === 'en' ? 'Collections' : 'Colecciones'} - ${t.meta.title}`,
+    description: t.meta.description,
     alternates: {
       canonical: `/${locale}/colecciones`,
       languages: { es: "/es/colecciones", en: "/en/colecciones" }

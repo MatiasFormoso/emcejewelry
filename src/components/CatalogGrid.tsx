@@ -38,14 +38,14 @@ export default function CatalogGrid({ t, locale }: CatalogGridProps) {
   }, []);
 
   const categories = [
-    { key: 'all', label: t.catalog.filters.all },
-    { key: 'rings', label: t.catalog.filters.rings },
-    { key: 'earrings', label: t.catalog.filters.earrings },
-    { key: 'ear-cuffs', label: t.catalog.filters['ear-cuffs'] },
-    { key: 'bracelets', label: t.catalog.filters.bracelets },
-    { key: 'chokers', label: t.catalog.filters.chokers },
-    { key: 'sets', label: t.catalog.filters.sets },
-    { key: 'anklets', label: t.catalog.filters.anklets },
+    { key: 'all', label: locale === 'en' ? 'All' : 'Todos' },
+    { key: 'rings', label: locale === 'en' ? 'Rings' : 'Anillos' },
+    { key: 'earrings', label: locale === 'en' ? 'Earrings' : 'Aretes' },
+    { key: 'ear-cuffs', label: locale === 'en' ? 'Ear Cuffs' : 'Cuffs' },
+    { key: 'bracelets', label: locale === 'en' ? 'Bracelets' : 'Pulseras' },
+    { key: 'chokers', label: locale === 'en' ? 'Chokers' : 'Chokers' },
+    { key: 'sets', label: locale === 'en' ? 'Sets' : 'Sets' },
+    { key: 'anklets', label: locale === 'en' ? 'Anklets' : 'Tobilleras' },
   ];
 
   const filteredProducts = selectedCategory === 'all'
