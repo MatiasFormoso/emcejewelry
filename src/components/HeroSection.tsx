@@ -8,11 +8,13 @@ import type { Dict, Locale } from '@/i18n/config';
 type HeroSectionProps = { t: Dict; locale: Locale };
 
 export default function HeroSection({ t, locale }: HeroSectionProps) {
-  const whatsappUrl = `https://api.whatsapp.com/send?phone=971547083607&text=${encodeURIComponent(
-    locale === 'en' 
-      ? 'Hello! I would like to schedule an appointment to learn more about EMC Jewelry pieces.'
-      : 'Hola! Me gustaría agendar una cita para conocer más sobre las piezas de EMC Jewelry.'
-  )}`;
+  const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const section = document.getElementById('philosophy');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <section id="hero" className="relative overflow-hidden">
@@ -83,13 +85,12 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
             transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             <motion.a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#philosophy"
+              onClick={handleScrollToSection}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="group relative bg-white hover:bg-white/95 text-gray-900 px-10 py-4 text-base font-light tracking-wide transition-all duration-300 flex items-center justify-center shadow-lg"
+              className="group relative bg-white hover:bg-white/95 text-gray-900 px-10 py-4 text-base font-light tracking-wide transition-all duration-300 flex items-center justify-center shadow-lg cursor-pointer"
             >
               <Calendar className="w-5 h-5 mr-3" />
               <span>{t.hero.cta}</span>
