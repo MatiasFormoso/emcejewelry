@@ -96,11 +96,11 @@ const en: Dict = {
     subtitle: "Learn the story behind EMC Jewelry",
     mission: {
       title: "Our Mission",
-      description: "To create exceptional jewelry that celebrates life's most important moments, combining innovative design with traditional artisanal techniques.",
+      description: "EMC Jewelry's mission is to honor Colombia's artisanal heritage by creating handmade, one-of-a-kind jewelry that weaves together ancestral techniques from diverse regions of the country. Through unique designs crafted as singular pieces, the brand seeks to uplift women's power and spirit—offering each creation as a symbol of beauty, remembrance, and the wearer's own individuality.",
     },
     vision: {
       title: "Our Vision",
-      description: "To be recognized as the leading jewelry brand in elegance, quality, and personalized service, inspiring trust and admiration in every customer.",
+      description: "EMC Jewelry envisions a future where Colombia's ancestral craftsmanship is globally recognized and preserved through contemporary design, and where women across cultures connect to their strength, identity, and individuality through meaningful, one-of-a-kind jewelry.",
     },
     values: {
       title: "Our Values",
