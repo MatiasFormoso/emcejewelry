@@ -102,12 +102,16 @@ export default function Header({ t, locale }: HeaderProps) {
               transition={{ duration: 0.4, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <a
-                href="https://api.whatsapp.com/send?phone=971547083607&text=Hola!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20las%20joyas%20de%20EMC%20Jewelry"
+                href={`https://api.whatsapp.com/send?phone=971547083607&text=${encodeURIComponent(
+                  locale === 'en' 
+                    ? 'Hello! I am interested in learning more about EMC Jewelry pieces.'
+                    : 'Hola! Me interesa saber más sobre las joyas de EMC Jewelry'
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full text-sm font-light tracking-wide transition-all duration-300 hover:shadow-lg"
               >
-                Contactar
+                {t.nav.contact}
               </a>
             </motion.div>
           </motion.div>
