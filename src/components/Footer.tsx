@@ -69,8 +69,8 @@ export default function Footer({ t, locale }: FooterProps) {
               </div>
               <div className="flex items-start space-x-4">
                 <Mail className="w-5 h-5 text-white mt-0.5 shrink-0" />
-                <a href="mailto:info@emcjewelry.com" className="text-gray-200 hover:text-white text-base font-light transition-colors duration-200 break-all">
-                  info@emcjewelry.com
+                <a href="mailto:emcjewelrybymaria@gmail.com" className="text-gray-200 hover:text-white text-base font-light transition-colors duration-200 break-all">
+                  emcjewelrybymaria@gmail.com
                 </a>
               </div>
               <div className="flex items-start space-x-4">
